@@ -1,0 +1,5 @@
+#Enter rules starting at the fifth line, one rule by line. Use > to separate markers, enter - before every negative marker
+lang = en #(en,ar,fr)
+max_distance_positive = 20 #distance in number of words that separates two consecutive positive markers 
+max_distance_negative = 12 #distance in number of words that seperates negative markers from positive markers only at the beginning and at the end of sentences
+(told|said)>(that|"|:|:")
