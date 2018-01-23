@@ -1,7 +1,7 @@
 # semantic_analyser
-This program extracts form a corpus of text files sentences that satisfy a set of linguistic rules
+This program extracts form a corpus of text files sentences satisfying a set of linguistic rules
 
-This program takes texts as an input from files in 'corpus' folder, and generates as output some html files in which sentences satisfying specific linguistic rules are extracted. This program splits text into sentences then recognizes sentences satisfying a set of specific rules.
+This program takes as an input texts from files in 'corpus' directory, and generates as output some html files containing sentences satisfying specific linguistic rules. This program splits text into sentences then recognizes sentences satisfying a set of specific rules.
 
 Install first activestate on your computer from here https://www.activestate.com/activeperl/downloads
 
