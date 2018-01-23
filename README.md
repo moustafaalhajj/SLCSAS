@@ -1,11 +1,13 @@
 # semantic_analyser
-This program extracts form a corpus of text files sentences satisfying a set of linguistic rules
+This program extracts, form a corpus of text files (in arabic, french or english), sentences satisfying a set of linguistic rules.
 
-This program takes as an input texts from files in 'corpus' directory, and generates as output some html files containing sentences satisfying specific linguistic rules. This program splits text into sentences then recognizes sentences satisfying a set of specific rules.
+This program takes as an input texts from files (txt files), and generates as output html files containing sentences satisfying specific set of linguistic rules. This program splits first text into sentences then recognizes and extracts sentences satisfying specified rules.
+
+To use it
 
 Install first activestate on your computer from here https://www.activestate.com/activeperl/downloads
 
-Create the 'corpus' and put into it all your txt files to process
+Create the 'corpus' directory and put into it all your txt files to process
 
 All txt files must be in utf8 encoding
 
@@ -17,11 +19,10 @@ max_distance_negative = 12 #distance in number of words that seperates negative 
 Enter here the rules, for example: said>that 
 End file 'rules.txt' (do not include this line in 'rules.txt')
 
-To use it, type
 Double clic the file 'sematicAnalysis.pl'
-a file results.html will be created and opened.
+a file results.html will be created and then visualised in your default internet browser.
 
-Any questions or comments, please send me an e-mail at moustafa DOT alhajj AT gmail DOT com (Do not include spaces)
 
 This program has been created by Moustafa Al-Hajj, associate professor at CSLC: http://cslc.univ-ul.com
 
+Any questions or comments, please send me an e-mail at moustafa DOT alhajj AT gmail DOT com (Do not include spaces)
