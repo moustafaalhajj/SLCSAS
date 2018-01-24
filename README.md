@@ -29,6 +29,10 @@ Enter here the rules, for example: -doesn't>said>that
 
 Double clic the file 'sematicAnalysis.pl' a file results.html will be created and then visualised in your default internet browser.
 
+Text highlighted in yellow marks positive markers
+
+Text highlighted in red marks the context in which there is no negative marker, move your mouse over this zone to see which negative marker 
+
 This program has been created by Moustafa Al-Hajj, associate professor at CSLC: http://cslc.univ-ul.com
 
 Any questions or comments, please send me an e-mail at moustafa DOT alhajj AT gmail DOT com (Do not include spaces)
