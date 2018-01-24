@@ -1,6 +1,6 @@
 # Semantic Analyser
 # By Moustafa Al-Hajj
-# Last modification 01/21/2018
+# Last modification 01/24/2018
 # This program checks rules to see sentences satisfying them.
 # Its input is text files in 'corpus' folder, and its output is a html file 
 # where sentences satisfying rules are extracted. 
@@ -21,17 +21,20 @@ sub segObeyRule {
 			if($marker !~ /[:'",.;%!?]/ ){#if marker does not contain one of these characters
 				$marker = "\\b$marker\\b";#add bondaries side to the marker, \b to match the left or right bondary of the term in $marker
 			}
-			if($seg =~ /$marker/i){
-				my $between = $`;
-				$m = length($&);
-				$r = length($');
-				$seg = $';
-				
-				my $matched = $&;
-				if ( ($matched =~ /\w$/ && $seg =~ /^\w/) || ($matched =~ /^\w/ && $between =~ /\w$/) ){
-						return %failure;
+			START:
+			if($seg =~ /$marker/gi){
+				my $aaa = $';
+				my $bbb = $&;
+				my $ccc = $`;
+				if ( ($bbb =~ /\w$/ && $aaa =~ /^\w/) || ($bbb =~ /^\w/ && $ccc =~ /\w$/) ){
+						goto START;
+						#return %failure;
 				}
-				
+				my $between = $ccc;#$`;
+				$m = length($bbb);#length($&);
+				$r = length($aaa);#length($');
+				$seg = $aaa;#$';
+
 				$n = length($between);
 				$t += $n+$m;$o = $t-$m;
 				######test distance betweeen markers######## 
@@ -266,16 +269,17 @@ while (my $file = readdir(DIR)) {
 			}
 		}elsif ($g >= 5){
 			chomp($rule);
-			
-			$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
-			$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
-			
-			my @markers = split(/>/,$rule);
-			foreach my $seg ( @segments ){
-				my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
-				if( $results{-1} ne "none" ) {
-					my $s = insertTags($seg,%results);
-					print RR "<li>$s</li>\n";
+			if( $rule !~ /^\s*$/){
+				$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
+				$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
+				
+				my @markers = split(/>/,$rule);
+				foreach my $seg ( @segments ){
+					my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
+					if( $results{-1} ne "none" ) {
+						my $s = insertTags($seg,%results);
+						print RR "<li>$s</li>\n";
+					}
 				}
 			}
 		}
@@ -306,6 +310,3 @@ print RES "</ol>
 close(RES);
 my $display = `start "" results.html`;
 exit;
-
-
-
