@@ -28,14 +28,8 @@ sub segObeyRule {
 				$seg = $';
 				
 				my $matched = $&;
-				if ( $matched =~ /\w$/ ){
-					if( $seg =~ /^\w/){
+				if ( ($matched =~ /\w$/ && $seg =~ /^\w/) || ($matched =~ /^\w/ && $between =~ /\w$/) ){
 						return %failure;
-					}
-				}elsif ( $matched =~ /^\w/ ){
-					if( $between =~ /\w$/){
-						return %failure;
-					}
 				}
 				
 				$n = length($between);
@@ -312,3 +306,6 @@ print RES "</ol>
 close(RES);
 my $display = `start "" results.html`;
 exit;
+
+
+
