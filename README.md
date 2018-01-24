@@ -23,10 +23,10 @@ max_distance_positive = 20 #distance in number of words that separates two conse
 max_distance_negative = 12 #distance in number of words that seperates negative markers from positive markers only at the beginning and at the end of sentences
 
 Enter here the rules, for example: -doesn't>said>that 
+
 ########End file 'rules.txt' (do not include this line in 'rules.txt')######
 
-Double clic the file 'sematicAnalysis.pl'
-a file results.html will be created and then visualised in your default internet browser.
+Double clic the file 'sematicAnalysis.pl' a file results.html will be created and then visualised in your default internet browser.
 
 This program has been created by Moustafa Al-Hajj, associate professor at CSLC: http://cslc.univ-ul.com
 
