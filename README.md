@@ -11,14 +11,18 @@ Create the 'corpus' directory and put into it all your txt files to process
 
 All txt files must be in utf8 encoding
 
-Create 'rules.txt' and put into it following lines:
+Create 'rules.txt' and put into it following lines (Don't include empty lines):
 
 ######Begin file 'rules.txt' (Do not include this line)#########<br>
+
 #Enter rules starting at the fifth line, one rule by line. Use > to separate markers, enter - before every negative marker
 lang = en #(en,ar,fr)
+
 max_distance_positive = 20 #distance in number of words that separates two consecutive positive markers 
+
 max_distance_negative = 12 #distance in number of words that seperates negative markers from positive markers only at the beginning and at the end of sentences
-Enter here the rules, for example: -doesn't>said>that
+
+Enter here the rules, for example: -doesn't>said>that 
 ########End file 'rules.txt' (do not include this line in 'rules.txt')######
 
 Double clic the file 'sematicAnalysis.pl'
