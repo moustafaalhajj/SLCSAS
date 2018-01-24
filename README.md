@@ -16,6 +16,7 @@ Create 'rules.txt' and put into it following lines (Don't include empty lines):
 ######Begin file 'rules.txt' (Do not include this line)#########<br>
 
 #Enter rules starting at the fifth line, one rule by line. Use > to separate markers, enter - before every negative marker
+
 lang = en #(en,ar,fr)
 
 max_distance_positive = 20 #distance in number of words that separates two consecutive positive markers 
