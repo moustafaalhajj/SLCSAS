@@ -1,6 +1,6 @@
 # Semantic Analyser
 # By Moustafa Al-Hajj
-# Last modification 01/24/2018
+# Last modification 01/25/2018
 # This program checks rules to see sentences satisfying them.
 # Its input is text files in 'corpus' folder, and its output is a html file 
 # where sentences satisfying rules are extracted. 
@@ -256,7 +256,7 @@ while (my $file = readdir(DIR)) {
 		font-variant: normal;'";
 	}
 	print RR ">";
-	print RR "<h2 align=center color='brown' width='190px'>Extracted sentences</h2>";
+	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>Recognized Sentences</h2>";
 	print RR "<ol  style='width:92%;'>
 	";
 		}elsif ($g == 3){
@@ -286,8 +286,8 @@ while (my $file = readdir(DIR)) {
 	}
 	
 	print RR "</ol>
-	<hr style='border-width: 2px;'>";
-	print RR "<h2 align = center>Original text</h2>";
+	";
+	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>Original Text</h2>";
 	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>
 	<br><br>
 	<hr align=\"center\" color=\"brown\" width=\"190px\">
