@@ -7,11 +7,11 @@ INPUT OF THE PROGRAM
 
 2. A set of linguistic rules defined in 'rules.txt' in the following format:
 
-a_positive_linguistic_marker or -a_negative_linguistic_marker>another_positive_linguistic_marker or -another_negative_linguistic_marker>etc. 
+    a_positive_linguistic_marker or -a_negative_linguistic_marker>another_positive_linguistic_marker or -another_negative_linguistic_marker>etc. 
 
-Note the use of '-' symbol before negative markers and '>' symbol to indicate followed by
+    Note the use of '-' symbol before negative markers and '>' symbol to indicate followed by
 
-For example, to write the following linguistic rule : 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that 
+    For example, to write the following linguistic rule : 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that 
 
 OUTPUT OF THE PROGRAM 
 
@@ -19,7 +19,7 @@ html files showing extracted sentences where positive markers are highlighted in
 
 This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
-To use it
+TO USE IT
 
 1. Install first activestate on your computer from here https://www.activestate.com/activeperl/downloads
 
@@ -39,7 +39,7 @@ To use it
 
     Enter here the rules, for example: -doesn't>said>that 
 
-########End file 'rules.txt' (do not include this line in 'rules.txt')######
+    ########End file 'rules.txt' (do not include this line in 'rules.txt')######
 
 4. Double clic the file 'sematicAnalysis.pl', then the file results.html will be created and visualised in your default internet browser.
 
