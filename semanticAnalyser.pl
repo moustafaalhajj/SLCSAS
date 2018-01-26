@@ -1,9 +1,8 @@
 # Semantic Analyser
 # By Moustafa Al-Hajj
-# Last modification 01/25/2018
 # This program checks rules to see sentences satisfying them.
 # Its input is text files in 'corpus' folder, and its output is a html file 
-# where sentences satisfying rules are extracted. 
+# where sentences satisfying rules are recognized. 
 use strict;
 
 #segObeyRule: For a given $seg and a given @markers this function tests if the list of positive markers in @markers is belonged to $seg and the list of negative markers does not belonged to $seg respecting the order of markers in @markers
@@ -174,7 +173,9 @@ print RES "<html>
 	<meta name=\"description\" content=\"Sematic analysis\" />\n
 	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>
 	</head>
-	<body>
+	<body style='background-color: #CDDCDC;
+ background-image: radial-gradient(at 50% 100%, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.25) 100%);
+ background-blend-mode: screen, overlay;'>
 	<h1>Results</h1>
 	<ol style='padding-left:40px;'>
 	";
@@ -248,12 +249,13 @@ while (my $file = readdir(DIR)) {
 	</head>
 	 <body dir=$lang";
 	if ($lang eq "rtl"){
-		print RR " style='font-family:traditional arabic;font-size: 20px; font-weight: bold;'";
+		print RR " style='font-family:traditional arabic;font-size: 20px; font-weight: bold;background-color: #F6F6F6;'";
 	}elsif ($lang eq "ltr"){
-		print RR " style='	font-family: Garamond, Baskerville, Baskerville Old Face, Hoefler Text, Times New Roman, serif;
-		font-size: 16px;
+		print RR " style='	font-family: \"Lucida Grande\",\"Lucida Sans Unicode\",Helvetica,Arial;
+		font-size: 14px;
 		font-style: normal;
-		font-variant: normal;'";
+		line-height: 24px;
+		font-variant: normal;background-color: #F6F6F6;'";
 	}
 	print RR ">";
 	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>Recognized Sentences</h2>";
@@ -301,10 +303,6 @@ while (my $file = readdir(DIR)) {
 closedir(DIR);
 
 print RES "</ol>
-<br><br>
-	<hr align=\"center\" color=\"brown\" width=\"190px\">
-	<div align=\"center\" style=\"font-family: verdana; direction: ltr; font-size: 9px;\">
-	CSLC tools 2018. All Rights Reserved.  </div>
 </body>
 </html>";
 close(RES);
