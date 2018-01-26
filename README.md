@@ -1,37 +1,48 @@
 # semantic_analyser
-This program extracts, form a corpus of text files (in arabic, french or english), sentences satisfying a set of linguistic rules.
+This program extracts, form a corpus of text files (text could be arabic, french or english), sentences satisfying a set of defined linguistic rules.
 
-This program takes as an input texts from files (txt files), and generates as output html files containing sentences satisfying specific set of linguistic rules. This program splits first text into sentences then recognizes and extracts sentences satisfying specified rules.
+INPUT OF THE PROGRAM
+
+1. Texts from files (files .txt in 'corpus' repertory)
+
+2. A set of linguistic rules defined in 'rules.txt' in the following format:
+
+a_positive_linguistic_marker or -a_negative_linguistic_marker>another_positive_linguistic_marker or -another_negative_linguistic_marker>etc. 
+
+Note the use of '-' symbol before negative markers and '>' symbol to indicate followed by
+
+For example, to write the following linguistic rule : 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that 
+
+OUTPUT OF THE PROGRAM 
+
+html files showing extracted sentences where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.  
+
+This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
 To use it
 
-Install first activestate on your computer from here https://www.activestate.com/activeperl/downloads
+1. Install first activestate on your computer from here https://www.activestate.com/activeperl/downloads
 
-Create the 'corpus' directory and put into it all your txt files to process
+2. Create the 'corpus' directory and put into it all your files .txt to process
 
-All txt files must be in utf8 encoding
+    All txt files must be in utf8 encoding
 
-Create 'rules.txt' and put into it following lines (Don't include empty lines):
+3. Create 'rules.txt' (if does not exist) and put into it following lines in the same order (Don't include empty lines):
 
-######Begin file 'rules.txt' (Do not include this line)#########<br>
+    #Enter rules starting at the fifth line, one rule by line.
 
-#Enter rules starting at the fifth line, one rule by line. Use > to separate markers, enter - before every negative marker
+    lang = en #(en,ar,fr)
 
-lang = en #(en,ar,fr)
+    max_distance_positive = 20 #the max distance (in number of words) separating two consecutive positive markers 
 
-max_distance_positive = 20 #distance in number of words that separates two consecutive positive markers 
+    max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. Only negative markers at the begining and at the end of rules are used, negative markers between positive markers are not used.
 
-max_distance_negative = 12 #distance in number of words that seperates negative markers from positive markers only at the beginning and at the end of sentences
-
-Enter here the rules, for example: -doesn't>said>that 
+    Enter here the rules, for example: -doesn't>said>that 
 
 ########End file 'rules.txt' (do not include this line in 'rules.txt')######
 
-Double clic the file 'sematicAnalysis.pl' a file results.html will be created and then visualised in your default internet browser.
+4. Double clic the file 'sematicAnalysis.pl', then the file results.html will be created and visualised in your default internet browser.
 
-Text highlighted in yellow marks positive markers
-
-Text highlighted in red marks the context in which there is no negative marker, move your mouse over this zone to see which negative marker 
 
 This program has been created by Moustafa Al-Hajj, associate professor at CSLC: http://cslc.univ-ul.com
 
