@@ -172,6 +172,9 @@ print RES "<html>
 	<meta name=\"author\" content=\"Moustafa AL-HAJJ\" />\n
 	<meta name=\"description\" content=\"Sematic analysis\" />\n
 	<meta http-equiv='Content-Type' content='text/html;charset=UTF-8'>
+	<style>
+		ol li {margin-bottom: 10px;font-size:18px;}
+	</style>
 	</head>
 	<body style='background-color: #CDDCDC;
  background-image: radial-gradient(at 50% 100%, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.25) 100%);
@@ -308,3 +311,6 @@ print RES "</ol>
 close(RES);
 my $display = `start "" results.html`;
 exit;
+
+
+
