@@ -1,5 +1,5 @@
 # semantic_analyser
-This program extracts, form a corpus of text files (text could be arabic, french or english), sentences satisfying a set of defined linguistic rules.
+Form a corpus of text files in arabic, french or english, this program extracts sentences satisfying a set of defined linguistic rules.
 
 INPUT OF THE PROGRAM
 
