@@ -1,5 +1,5 @@
 # semantic_analyser
-Form a corpus of text files in arabic, french or english, this program extracts sentences satisfying a set of defined linguistic rules.
+This program extracts sentences satisfying a set of defined linguistic rules from a corpus of arabic, french or english text documents. 
 
 INPUT OF THE PROGRAM
 
@@ -9,7 +9,7 @@ INPUT OF THE PROGRAM
 
     a_positive_linguistic_marker or -a_negative_linguistic_marker>another_positive_linguistic_marker or -another_negative_linguistic_marker>etc. 
 
-    Note the use of '-' symbol before negative markers and '>' symbol to indicate followed by
+    Note the use of '-' symbol before negative markers and '>' symbol to indicate 'followed by'
 
     For example, to write the following linguistic rule : 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that 
 
@@ -27,7 +27,7 @@ TO USE IT
 
     All txt files must be in utf8 encoding
 
-3. Create 'rules.txt' (if does not exist) and put into it following lines in the same order (Don't include empty lines):
+3. Create 'rules.txt' (you can download it) and put into it following lines in the same order (Don't include empty lines):
 
     #Enter rules starting at the fifth line, one rule by line.
 
