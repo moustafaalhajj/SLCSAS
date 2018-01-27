@@ -1,5 +1,5 @@
 # semantic_analyser
-This program extracts sentences satisfying a set of defined linguistic rules from a corpus of arabic, french or english text documents. 
+This program extracts sentences satisfying a set of linguistic rules from a corpus of arabic, french or english documents. 
 
 INPUT OF THE PROGRAM
 
@@ -41,7 +41,7 @@ TO USE IT
 
     ########End file 'rules.txt' (do not include this line in 'rules.txt')######
 
-4. Double clic the file 'sematicAnalysis.pl', then the file results.html will be created and visualised in your default internet browser.
+4. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser.
 
 
 This program has been created by Moustafa Al-Hajj, associate professor at CSLC: http://cslc.univ-ul.com
