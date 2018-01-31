@@ -27,12 +27,11 @@ sub segObeyRule {
 				my $ccc = $`;
 				if ( ($bbb =~ /\w$/ && $aaa =~ /^\w/) || ($bbb =~ /^\w/ && $ccc =~ /\w$/) ){
 						goto START;
-						#return %failure;
 				}
-				my $between = $ccc;#$`;
-				$m = length($bbb);#length($&);
-				$r = length($aaa);#length($');
-				$seg = $aaa;#$';
+				my $between = $ccc;
+				$m = length($bbb);
+				$r = length($aaa);
+				$seg = $aaa;
 
 				$n = length($between);
 				$t += $n+$m;$o = $t-$m;
@@ -78,7 +77,6 @@ sub segObeyRule {
 							$marks{$o} = "</negative>".$marks{$o};
 						}
 					}
-				
 					$negmarker = "";
 				}
 				if( $firstpositive == 1 ){
@@ -176,9 +174,7 @@ print RES "<html>
 		ol li {margin-bottom: 10px;font-size:18px;}
 	</style>
 	</head>
-	<body style='background-color: #CDDCDC;
- background-image: radial-gradient(at 50% 100%, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.25) 100%);
- background-blend-mode: screen, overlay;'>
+	<body style='background:#f7fcfe none repeat scroll 0 0;color: #253b80;'>
 	<h1>Results</h1>
 	<ol style='padding-left:40px;'>
 	";
@@ -252,13 +248,13 @@ while (my $file = readdir(DIR)) {
 	</head>
 	 <body dir=$lang";
 	if ($lang eq "rtl"){
-		print RR " style='font-family:traditional arabic;font-size: 20px; font-weight: bold;background-color: #F6F6F6;'";
+		print RR " style='font-family:traditional arabic;font-size: 20px; font-weight: bold;background:#f7fcfe none repeat scroll 0 0;'";
 	}elsif ($lang eq "ltr"){
 		print RR " style='	font-family: \"Lucida Grande\",\"Lucida Sans Unicode\",Helvetica,Arial;
 		font-size: 14px;
 		font-style: normal;
 		line-height: 24px;
-		font-variant: normal;background-color: #F6F6F6;'";
+		font-variant: normal;background:#f7fcfe none repeat scroll 0 0;'";
 	}
 	print RR ">";
 	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>Recognized Sentences</h2>";
@@ -311,6 +307,3 @@ print RES "</ol>
 close(RES);
 my $display = `start "" results.html`;
 exit;
-
-
-
