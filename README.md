@@ -35,7 +35,7 @@ TO USE IT
 
     max_distance_positive = 20 #the max distance (in number of words) separating two consecutive positive markers 
 
-    max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. Only negative markers at the begining and at the end of rules are used, negative markers between positive markers are not used.
+    max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. max_distance_negative is only considered when negative markers appear at the begining and at the end of rules, otherwise for negative markers between positive markers max_distance_negative is not considered.
 
     Enter here the rules, for example: -doesn't>said>that 
 
