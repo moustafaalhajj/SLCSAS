@@ -1,5 +1,5 @@
 # semantic_analyser
-This program extracts sentences satisfying a set of linguistic rules, representing specific semantic categories, from a corpus of arabic, french or english documents. 
+This program extracts sentences satisfying a set of linguistic rules for a set of semantic categories, from a corpus of arabic, french or english documents. 
 
 INPUT OF THE PROGRAM
 
