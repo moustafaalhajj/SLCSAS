@@ -1,5 +1,5 @@
 # semantic_analyser
-This program extracts sentences satisfying a set of linguistic rules from a corpus of arabic, french or english documents. 
+This program extracts sentences satisfying a set of linguistic rules, representing specific semantic categories, from a corpus of arabic, french or english documents. 
 
 INPUT OF THE PROGRAM
 
@@ -7,15 +7,15 @@ INPUT OF THE PROGRAM
 
 2. A set of linguistic rules defined in 'rules.txt' in the following format:
 
-    a_positive_linguistic_marker or -a_negative_linguistic_marker>another_positive_linguistic_marker or -another_negative_linguistic_marker>etc. 
+    a_positive_linguistic_marker or -a_negative_linguistic_marker>another_positive_linguistic_marker or -another_negative_linguistic_marker>etc. -> a_semantic_category
 
-    Note the use of '-' symbol before negative markers and '>' symbol to indicate 'followed by'
+    Note the use of '-' symbol before negative markers, '>' symbol to indicate 'followed by' and '->' to enter after it the semantic category
 
-    For example, to write the following linguistic rule : 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that 
+    For example, to write the following linguistic rule for the semantic category 'CITATION': 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that -> citation
 
 OUTPUT OF THE PROGRAM 
 
-html files showing extracted sentences where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.  
+html files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.  
 
 This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
@@ -37,7 +37,7 @@ TO USE IT
 
     max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. max_distance_negative is only considered when negative markers appear at the begining and at the end of rules, otherwise for negative markers between positive markers max_distance_negative is not considered.
 
-    Enter here the rules, for example: -doesn't>said>that 
+    Enter here the rules, for example: -doesn't>said>that -> citation
 
     ########End file 'rules.txt' (do not include this line in 'rules.txt')######
 
