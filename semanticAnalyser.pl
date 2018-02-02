@@ -258,7 +258,7 @@ while (my $file = readdir(DIR)) {
 		font-variant: normal;background:#f7fcfe none repeat scroll 0 0;'";
 	}
 	print RR ">";
-	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>Result</h2>";
+	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>RESULT</h2>";
 	#print RR "<ol  style='width:92%;'>	";
 		}elsif ($g == 3){
 			if( $rule =~ /(\s+)?max_distance_positive(\s+)?=(\s+)?(\d+)(\s+)?/ ){
@@ -296,7 +296,7 @@ while (my $file = readdir(DIR)) {
 		print RR $rescateg{$k};
 		print RR "</ol>\n	";
 	}
-	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>Original Text</h2>";
+	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>ORIGINAL TEXT</h2>";
 	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>
 	<br><br>
 	<hr align=\"center\" color=\"brown\" width=\"190px\">
