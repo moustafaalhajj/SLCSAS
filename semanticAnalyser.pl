@@ -203,6 +203,7 @@ while (my $file = readdir(DIR)) {
 	
 	open(RULES,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
 	$g = 0;
+	my %rescateg=(); 
 	while(<RULES>){
 		my $rule = $_;
 		$g++;
@@ -242,8 +243,8 @@ while (my $file = readdir(DIR)) {
 	.tooltip:hover .tooltiptext {
 		visibility: visible;
 	}
-
 	ol li{white-space:pre-wrap;text-align:justify;}
+	h4{font-family: Verdana, Arial, Helvetica, sans-serif;color: #6600FF;}
 	</style>
 	</head>
 	 <body dir=$lang";
@@ -257,9 +258,8 @@ while (my $file = readdir(DIR)) {
 		font-variant: normal;background:#f7fcfe none repeat scroll 0 0;'";
 	}
 	print RR ">";
-	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>Recognized Sentences</h2>";
-	print RR "<ol  style='width:92%;'>
-	";
+	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>Result</h2>";
+	#print RR "<ol  style='width:92%;'>	";
 		}elsif ($g == 3){
 			if( $rule =~ /(\s+)?max_distance_positive(\s+)?=(\s+)?(\d+)(\s+)?/ ){
 				$max_dist_positive = $4;
@@ -271,23 +271,31 @@ while (my $file = readdir(DIR)) {
 		}elsif ($g >= 5){
 			chomp($rule);
 			if( $rule !~ /^\s*$/){
+				$rule =~ s/\s+$//;
 				$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
 				$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
 				
-				my @markers = split(/>/,$rule);
+				my @rc = split(/\s*-\s*>\s*/,$rule);
+				
+				
+				my @markers = split(/>/,$rc[0]);
 				foreach my $seg ( @segments ){
 					my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
 					if( $results{-1} ne "none" ) {
-						my $s = insertTags($seg,%results);
-						print RR "<li>$s</li>\n";
+						my $s = "<li>".insertTags($seg,%results)."</li>";
+						$rescateg{uc($rc[1])} .= $s;
+						#print RR "<li>$s</li>\n";
 					}
 				}
 			}
 		}
 	}
-	
-	print RR "</ol>
-	";
+	foreach my $k (keys(%rescateg)) {
+		print RR "<h4>$k</h4>";
+		print RR "<ol  style='width:92%;'>	";
+		print RR $rescateg{$k};
+		print RR "</ol>\n	";
+	}
 	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>Original Text</h2>";
 	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>
 	<br><br>
