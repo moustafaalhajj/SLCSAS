@@ -1,5 +1,10 @@
-#Enter rules starting at the fifth line, one rule by line. Use > to separate markers, enter - before every negative marker
-lang = en #(en,ar,fr)
+#Enter rules starting at the fifth line, one rule by line. Use '>' to separate markers, use '-' before every negative marker, use '->' between rule and semantic category
+lang = fr #(en,ar,fr)
 max_distance_positive = 20 #distance in number of words that separates two consecutive positive markers 
 max_distance_negative = 12 #distance in number of words that seperates negative markers from positive markers only at the beginning and at the end of sentences
-(told|said)>(that|"|:|:")
+-n'a pas>(dit|annoncé|déclaré|révélé|estimé|avertit|relayé|affirmé)(e)?>(que|:"|"|:) -> citation
+-ne>(disait|annoncait|déclarait|révélait|estimait|affirmait)>(que|:"|"|:) -> citation
+(n|c)'est>pas>bien -> opinion negatif
+-n'>est>-pas>bien -> opinion positif
+(c|n)'est pas mal -> opinion positif
+-n'>est>-pas>mal -> opinion negatif
