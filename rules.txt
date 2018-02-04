@@ -4,7 +4,7 @@ max_distance_positive = 20 #distance in number of words that separates two conse
 max_distance_negative = 12 #distance in number of words that seperates negative markers from positive markers only at the beginning and at the end of sentences
 -n'a pas>(dit|annoncé|déclaré|révélé|estimé|avertit|relayé|affirmé)(e)?>(que|:"|"|:) -> citation
 -ne>(disait|annoncait|déclarait|révélait|estimait|affirmait)>(que|:"|"|:) -> citation
-(n|c)'est>pas>bien -> opinion negatif
--n'>est>-pas>bien -> opinion positif
-(c|n)'est pas mal -> opinion positif
--n'>est>-pas>mal -> opinion negatif
+(n|c)'est>pas>bien -> opinion negative
+-n'>est>-pas>bien -> opinion positive
+(c|n)'est pas mal -> opinion positive
+-n'>est>-pas>mal -> opinion negative
