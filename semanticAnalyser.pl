@@ -130,12 +130,12 @@ sub insertTags{
 }
 sub sentencesEn{
 	my $para = shift;
-	my @parts = split(/(?<!\W\w[.])(?<![A-Z]\w[.])(?<![A-Z]\w\w[.])(?<![A-Z]\w\w\w[.])(?<=[.])(\s+)?(?=([A-Z]|\x{00AB}|["]|[(]))/,$para);
+	my @parts = split(/(?<!\W\w[.])(?<![A-Z]\w[.])(?<![A-Z]\w\w[.])(?<![A-Z]\w\w\w[.])(?<=[.])(\s+)?(?=[^a-z])/,$para);
 	return @parts; 
 }
 sub sentencesAr{
 	my $para = shift;
-	my @parts = split(/(?<=(\.))(\s+)?(?=(\w|\x{00AB}|["]|[(]))/,$para);
+	my @parts = split(/(?<=(\.))(\s+)?(?=.)/,$para);
 	return @parts; 
 }
 
