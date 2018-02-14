@@ -19,14 +19,20 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
         SC: a Semantic Category
 
-        Note the use of '-' symbol before negative markers, '>' symbol to indicate 'followed by' and '->' to enter after it the semantic category
-    For example, to write the following linguistic rule for the semantic category 'CITATION': 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that -> citation
+        Note the use of '-' symbol before negative markers,
+        '>' symbol to indicate 'followed by' 
+        and '->' to enter after it the semantic category
+       
+       For example, to write the following linguistic rule for the semantic category 'CITATION':
+       'said' not preceded by 'does not' and followed by 'that',
+       one should write the following rule: 
+       -does not>said>that -> citation
 
 ## Output of the program
 
-   html files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.
+HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.
 
-   This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
+This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
 ## To use it
 
@@ -40,16 +46,16 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
    4. Create 'rules.txt' (you can download it) and put into it following lines in the same order (Don't include empty lines):
 
-        #Enter rules starting at the fifth line, one rule by line.
+           #Enter rules starting at the fifth line, one rule by line.
 
-        lang = en #(en,ar,fr)
+           lang = en #(en,ar,fr)
 
-        max_distance_positive = 20 #the max distance (in number of words) separating two consecutive positive markers
+           max_distance_positive = 20 #the max distance (in number of words) separating two consecutive positive markers
 
-        max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. max_distance_negative is only considered when negative markers appear at the begining and at the end of rules, otherwise for negative markers between positive markers max_distance_negative is not considered.
+           max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. max_distance_negative is only considered when negative markers appear at the begining and at the end of rules, otherwise for negative markers between positive markers max_distance_negative is not considered.
 
-        Enter here the rules, for example: -doesn't>said>that -> citation
+           Enter here the rules, for example: -doesn't>said>that -> citation
 
-        ########End file 'rules.txt' (do not include this line in 'rules.txt')######
+           ########End file 'rules.txt' (do not include this line in 'rules.txt')######
 
    5. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser.
