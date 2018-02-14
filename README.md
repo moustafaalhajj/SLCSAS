@@ -13,21 +13,21 @@ INPUT OF THE PROGRAM
 
     Where 
 
-PM: a Positive Marker
+        PM: a Positive Marker
 
-AM: a Negative Marker
+        AM: a Negative Marker
 
-SC: a Semantic Category
+        SC: a Semantic Category
 
-Note the use of '-' symbol before negative markers, '>' symbol to indicate 'followed by' and '->' to enter after it the semantic category
+        Note the use of '-' symbol before negative markers, '>' symbol to indicate 'followed by' and '->' to enter after it the semantic category
 
-For example, to write the following linguistic rule for the semantic category 'CITATION': 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that -> citation
+    For example, to write the following linguistic rule for the semantic category 'CITATION': 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that -> citation
 
 OUTPUT OF THE PROGRAM
 
-html files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.
+    html files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.
 
-This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
+    This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
 TO USE IT
 
