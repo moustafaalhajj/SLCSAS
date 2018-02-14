@@ -9,7 +9,7 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
    2. A set of linguistic rules defined in the file 'rules.txt' in the following format:
 
-   PM or -NM>PM or -NM>etc. -> SC
+          PM or -NM>PM or -NM>etc. -> SC
 
    Where 
 
