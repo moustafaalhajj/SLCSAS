@@ -1,5 +1,6 @@
 # Semantic Analyser
 This program is made for linguistics researchers, who create linguistic rules and want to extract and classify sentences following a set of semantic categories.
+
 This program extracts, from a corpus of arabic, french or english documents, sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlited in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
 
 ## Input of the program
@@ -43,13 +44,12 @@ This program splits texts into sentences and then researches in sentences positi
 
        All txt files must be in utf8 encoding
 
-   4. Create 'rules.txt' (you can download it) and put into it following lines in the same order (Don't include empty lines):
+   4. Create 'rules.txt' (you can download it) and put into it following lines in the same order (Enter rules below): 
 
            #Enter rules starting at the fifth line, one rule by line.
            lang = en #(en,ar,fr)
            max_distance_positive = 20 #the max distance (in number of words) separating two consecutive positive markers
            max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. max_distance_negative is only considered when negative markers appear at the begining and at the end of rules, otherwise for negative markers between positive markers max_distance_negative is not considered.
-           Enter here the rules, for example: -doesn't>said>that -> citation
-           ########End file 'rules.txt' (do not include this line in 'rules.txt')######
+           -doesn't>said>that -> citation
 
    5. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser.
