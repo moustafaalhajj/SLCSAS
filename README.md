@@ -1,9 +1,9 @@
-# semantic_analyser
-This program is made for linguistics researchers, who create linguistic rules and want to extract and classify sentences following a set of semantic categories.
+# Semantic Analyser
+    This program is made for linguistics researchers, who create linguistic rules and want to extract and classify sentences following a set of semantic categories.
 
-This program extracts, from a corpus of arabic, french or english documents, sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlited in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
+    This program extracts, from a corpus of arabic, french or english documents, sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlited in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
 
-# INPUT OF THE PROGRAM
+# Input of the program
 
     1. Text files .txt stored in the 'corpus' directory
 
@@ -23,13 +23,13 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
     For example, to write the following linguistic rule for the semantic category 'CITATION': 'said' not preceded by 'does not' and followed by 'that', one should write the following rule: -does not>said>that -> citation
 
-OUTPUT OF THE PROGRAM
+# Output of the program
 
     html files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.
 
     This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
-TO USE IT
+# To use it
 
     1. Download files from GitHub : https://github.com/moustafaalhajj/semantic_analyser
 
