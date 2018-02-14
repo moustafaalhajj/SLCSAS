@@ -3,7 +3,7 @@
 
     This program extracts, from a corpus of arabic, french or english documents, sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlited in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
 
-# Input of the program
+## Input of the program
 
     1. Text files .txt stored in the 'corpus' directory
 
