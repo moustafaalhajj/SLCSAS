@@ -23,10 +23,12 @@ This program extracts, from a corpus of arabic, french or english documents, sen
         '>' symbol to indicate 'followed by' 
         and '->' to enter after it the semantic category
        
-       For example, to write the following linguistic rule for the semantic category 'CITATION':
-       'said' not preceded by 'does not' and followed by 'that',
-       one should write the following rule: 
-       -does not>said>that -> citation
+      For example, to write the following linguistic rule for the semantic category 'CITATION':
+     
+         'said' not preceded by 'does not' and followed by 'that',
+      one should write the following rule: 
+      
+             -does not>said>that -> citation
 
 ## Output of the program
 
