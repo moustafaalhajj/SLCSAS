@@ -7,7 +7,7 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
    1. Text files .txt stored in the 'corpus' directory
 
-   2. A set of linguistic rules defined in the file 'rules.txt' in the following format:
+   2. A set of linguistic rules defined in the file #'rules.txt' in the following format:
 
           PM or -NM>PM or -NM>etc. -> SC
 
