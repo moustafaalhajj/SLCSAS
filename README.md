@@ -30,10 +30,14 @@ For example, to write the following linguistic rule for the semantic category 'C
 one should write the following rule: 
       
              -does not>said>that -> citation
+
 Variabe :verb_citation can be defined like this 
-         :verb_citation = said|told|declared|announced|pronounced
+
+            :verb_citation = said|told|declared|announced|pronounced
+
 Then it can be used as it, for example: 
-         -does not>:verb_citation -> citation
+
+            -does not>:verb_citation -> citation
 
 ## Output of the program
 
