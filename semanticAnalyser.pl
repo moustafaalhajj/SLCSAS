@@ -5,6 +5,20 @@
 # where sentences satisfying rules are recognized. 
 use strict;
 
+#Read all variable from rules.txt and store value in an associative table %var
+my %var = ();
+open(RULES,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
+while(<RULES>){
+	my $rule = $_;
+	chomp($rule);
+	if ( $rule =~ /^\s*:((\w|_)+)\s*=\s*(.*)\s*/){
+		 my $varname = $1; 
+		 $var{$varname} = $3;
+	}
+}
+close(RULES);
+
+
 #segObeyRule: For a given $seg and a given @markers this function tests if the list of positive markers in @markers is belonged to $seg and the list of negative markers does not belonged to $seg respecting the order of markers in @markers
 sub segObeyRule {
 	my %failure = (-1=>"none");
@@ -15,6 +29,11 @@ sub segObeyRule {
 	my $firstpositive = 1;
 	my $firstnegative = 1;
 	foreach my $marker(@markers){
+		if ($marker =~ /^-:((\w|_)+)/){
+			$marker = "-".$var{$1};
+		}elsif($marker =~ /^:((\w|_)+)/){
+			$marker = $var{$1};
+		}
 		if($marker !~ /^-/){
 			#$marker = substr($marker,1);
 			if($marker !~ /[:'",.;%!?]/ ){#if marker does not contain one of these characters
@@ -162,6 +181,10 @@ sub readtext{
 	return ($origtext,@segments);
 }
 
+
+
+
+
 #Create and open file results.html to write all results 
 open(RES,">:encoding(UTF-8)","results.html");
 print RES "<html>
@@ -270,21 +293,23 @@ while (my $file = readdir(DIR)) {
 			}
 		}elsif ($g >= 5){
 			chomp($rule);
-			if( $rule !~ /^\s*$/){
-				$rule =~ s/\s+$//;
-				$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
-				$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
-				
-				my @rc = split(/\s*-\s*>\s*/,$rule);
-				
-				
-				my @markers = split(/>/,$rc[0]);
-				foreach my $seg ( @segments ){
-					my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
-					if( $results{-1} ne "none" ) {
-						my $s = "<li>".insertTags($seg,%results)."</li>";
-						$rescateg{uc($rc[1])} .= $s;
-						#print RR "<li>$s</li>\n";
+			if ( $rule !~ /^\s*:((\w|_)+)\s*=\s*(.*)\s*/){
+				if( $rule !~ /^\s*$/){
+					$rule =~ s/\s+$//;
+					$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
+					$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
+					
+					my @rc = split(/\s*-\s*>\s*/,$rule);
+					
+					
+					my @markers = split(/\s*>\s*/,$rc[0]);
+					foreach my $seg ( @segments ){
+						my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
+						if( $results{-1} ne "none" ) {
+							my $s = "<li>".insertTags($seg,%results)."</li>";
+							$rescateg{uc($rc[1])} .= $s;
+							#print RR "<li>$s</li>\n";
+						}
 					}
 				}
 			}
