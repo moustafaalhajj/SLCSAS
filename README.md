@@ -31,17 +31,23 @@ one should write the following rule:
       
              -does not>said>that -> citation
 
-Variabe :verb_citation can be defined like this 
+Variabe ::verb_citation can be defined like this 
 
-            :verb_citation = said|told|declared|announced|pronounced
+            ::verb_citation = said|told|declared|announced|pronounced
 
 Then it can be used as it, for example: 
 
-            -does not>:verb_citation -> citation
+            -does not>::verb_citation -> citation
+            
+ To extract one or more excerpt form the segment use RRR instead of marker, for example to extract the part after "that": 
+ 
+            -does not>::verb_citation>RRR -> citation
+ 
+ 
 
 ## Output of the program
 
-HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red.
+HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts form sentences are puted below sentences in the result. 
 
 This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
