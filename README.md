@@ -69,7 +69,8 @@ This program splits texts into sentences and then researches in sentences positi
            max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. max_distance_negative is only considered when negative markers appear at the begining and at the end of rules, otherwise for negative markers between positive markers max_distance_negative is not considered.
            -doesn't>said>that -> citation
 
-   5. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser.
+   5. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser
+   
 
 
-                  # Enjoy
+Enjoy ... 
