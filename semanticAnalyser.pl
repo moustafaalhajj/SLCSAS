@@ -11,7 +11,7 @@ open(RULES,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
 while(<RULES>){
 	my $rule = $_;
 	chomp($rule);
-	if ( $rule =~ /^\s*:((\w|_)+)\s*=\s*(.*)\s*/){
+	if ( $rule =~ /^\s*::((\w|_)+)\s*=\s*(.*)\s*/){
 		 my $varname = $1; 
 		 $var{$varname} = $3;
 	}
@@ -28,13 +28,18 @@ sub segObeyRule {
 	my $t = 0;	my $o = 0;	my $n = 0;	my $m = 0;	my $r = 0;	my $pos = 0;
 	my $firstpositive = 1;
 	my $firstnegative = 1;
+	
+	my $rrr = 0;
+	my $segres = "";
+	
 	foreach my $marker(@markers){
-		if ($marker =~ /^-:((\w|_)+)/){
-			$marker = "-".$var{$1};
-		}elsif($marker =~ /^:((\w|_)+)/){
-			$marker = $var{$1};
-		}
-		if($marker !~ /^-/){
+		#if ($marker =~ /^-:((\w|_)+)/){
+		#	$marker = "-".$var{$1};
+		#}elsif($marker =~ /^:((\w|_)+)/){
+		#	$marker = $var{$1};
+		#}
+		$marker =~ s/::((\w|_)+)/\($var{$1}\)/g;
+		if($marker !~ /^-/ && $marker !~ /^RRR$/){
 			#$marker = substr($marker,1);
 			if($marker !~ /[:'",.;%!?]/ ){#if marker does not contain one of these characters
 				$marker = "\\b$marker\\b";#add bondaries side to the marker, \b to match the left or right bondary of the term in $marker
@@ -59,7 +64,7 @@ sub segObeyRule {
 				while ($between =~ /\b\w+\b/g ){
 					$cw++;
 				}
-				if( $cw > $max_dist_positive && $firstpositive == 0){ return %failure; }
+				if( $cw > $max_dist_positive && $firstpositive == 0){ return ($segres,%failure); }
 				####################
 				if($marks{$o}=~/^<\/[pn]/){
 					$marks{$o} .= "<positive style='background-color:yellow;'>";
@@ -71,6 +76,12 @@ sub segObeyRule {
 				}else{
 					$marks{$t} = "</positive>".$marks{$t};
 				}
+				
+				#####If there is a variable RRR to extract from $seg then keep $between in $segres
+				if($rrr == 1){
+					$segres .= "<li><span>".$between."</span></li>"; 
+					$rrr = 0;
+				}
 				if ($negmarker ne ""){
 					$pos = $o-$n;
 					if( $firstnegative == 1 && $firstpositive == 1 ){
@@ -81,7 +92,7 @@ sub segObeyRule {
 						}
 					}
 					if( $between =~ /\b$negmarker\b/i ){
-						return %failure;
+						return ($segres,%failure);
 					}
 					
 					if($between ne ""){
@@ -102,12 +113,22 @@ sub segObeyRule {
 					$firstpositive = 0;
      			}
 			}else{
-				return %failure;
+				return ($segres,%failure);
 			}
+
 		}elsif($marker =~ /^-/){
 			$negmarker = substr($marker,1);
+		}elsif($marker =~ /RRR/){
+			$rrr = 1;
 		}
 	}
+	
+	#####If there is a variable RRR to extract from $seg then keep $between in $segres
+	if($rrr == 1){
+		$segres .= "<li><span>".$seg."</span></li>"; 
+		$rrr = 0;
+	}
+	
 	if( $negmarker ne "" ){
 		my $gg = 0; # to remove from the end in case of number of words greater than max_dist_negative 
 		if ( $seg =~ /((\b\w+[^\w]+){$max_dist_negative})/ ){
@@ -115,7 +136,7 @@ sub segObeyRule {
 			$gg = length($');
 		}
 		if( $seg =~ /\b$negmarker\b/i ){
-			return %failure;
+			return ($segres,%failure);
 		}
 		$pos = $o+$m;
 		if($seg ne ""){
@@ -132,7 +153,8 @@ sub segObeyRule {
 			}
 		}
 	}
-	return %marks; 
+	
+	return ($segres,%marks); 
 }
 
 sub insertTags{
@@ -267,6 +289,7 @@ while (my $file = readdir(DIR)) {
 		visibility: visible;
 	}
 	ol li{white-space:pre-wrap;text-align:justify;}
+	ol li ul li span{background-color: #c0c0c0;}
 	h4{font-family: Verdana, Arial, Helvetica, sans-serif;color: #6600FF;}
 	</style>
 	</head>
@@ -293,7 +316,7 @@ while (my $file = readdir(DIR)) {
 			}
 		}elsif ($g >= 5){
 			chomp($rule);
-			if ( $rule !~ /^\s*:((\w|_)+)\s*=\s*(.*)\s*/){
+			if ( $rule !~ /^\s*::((\w|_)+)\s*=\s*(.*)\s*/){
 				if( $rule !~ /^\s*$/){
 					$rule =~ s/\s+$//;
 					$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
@@ -304,9 +327,10 @@ while (my $file = readdir(DIR)) {
 					
 					my @markers = split(/\s*>\s*/,$rc[0]);
 					foreach my $seg ( @segments ){
-						my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
+						my ($segres,%results) = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
 						if( $results{-1} ne "none" ) {
-							my $s = "<li>".insertTags($seg,%results)."</li>";
+							if($segres ne ""){$segres = "<ul>".$segres."</ul>";}
+							my $s = "<li>".insertTags($seg,%results).$segres."</li>";
 							$rescateg{uc($rc[1])} .= $s;
 							#print RR "<li>$s</li>\n";
 						}
