@@ -70,3 +70,6 @@ This program splits texts into sentences and then researches in sentences positi
            -doesn't>said>that -> citation
 
    5. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser.
+
+
+#Enjoy
