@@ -31,6 +31,7 @@ sub segObeyRule {
 	
 	my $rrr = 0;
 	my $segres = "";
+	my $temp = "";
 	
 	foreach my $marker(@markers){
 		#if ($marker =~ /^-:((\w|_)+)/){
@@ -53,6 +54,7 @@ sub segObeyRule {
 						goto START;
 				}
 				my $between = $ccc;
+				$temp = $between;
 				$m = length($bbb);
 				$r = length($aaa);
 				$seg = $aaa;
@@ -79,7 +81,7 @@ sub segObeyRule {
 				
 				#####If there is a variable RRR to extract from $seg then keep $between in $segres
 				if($rrr == 1){
-					$segres .= "<li><span>".$between."</span></li>"; 
+					$segres .= "<li><span>".$temp."</span></li>"; 
 					$rrr = 0;
 				}
 				if ($negmarker ne ""){
@@ -122,10 +124,10 @@ sub segObeyRule {
 			$rrr = 1;
 		}
 	}
-	
+	$temp = $seg;
 	#####If there is a variable RRR to extract from $seg then keep $between in $segres
 	if($rrr == 1){
-		$segres .= "<li><span>".$seg."</span></li>"; 
+		$segres .= "<li><span>".$temp."</span></li>"; 
 		$rrr = 0;
 	}
 	
