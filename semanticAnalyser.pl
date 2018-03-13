@@ -291,7 +291,8 @@ while (my $file = readdir(DIR)) {
 		visibility: visible;
 	}
 	ol li{white-space:pre-wrap;text-align:justify;}
-	ol li ul li span{background-color: #c0c0c0;}
+	ol li ul {border: 1px solid red;}
+	
 	h4{font-family: Verdana, Arial, Helvetica, sans-serif;color: #6600FF;}
 	</style>
 	</head>
