@@ -13,7 +13,10 @@ while(<RULES>){
 	chomp($rule);
 	if ( $rule =~ /^\s*::((\w|_)+)\s*=\s*(.*)\s*/){
 		 my $varname = $1; 
-		 $var{$varname} = $3;
+		 my $varvalue = $3;
+		 $varvalue =~ s/\s*\|/\|/g;
+		 $varvalue =~ s/\|\s*/|/g;
+		 $var{$varname} = $varvalue;
 	}
 }
 close(RULES);
