@@ -71,6 +71,8 @@ This program splits texts into sentences and then researches in sentences positi
 
    5. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser
    
+Enjoy ...
 
+If you require any further information, feel free to contact me at moustafa DOT al-hajj AT gmail DOT com
 
-Enjoy ... 
+ 
