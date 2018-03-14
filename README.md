@@ -39,11 +39,19 @@ Then it can be used as it, for example:
 
             -does not>::verb_citation -> citation
             
+            
  To extract from the sentences one or more excerpts use RRR instead of marker, for example to extract the part after "that": 
  
             -does not>::verb_citation>RRR -> citation
  
  
+A marker as following means a term beginning with 'th'
+
+            th*
+ 
+ Likewise, a marker as following means a term ending with 'th' 
+ 
+            *th
 
 ## Output of the program
 
