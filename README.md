@@ -45,11 +45,11 @@ Then it can be used as it, for example:
             -does not>::verb_citation>RRR -> citation
  
  
-A marker as following means a term beginning with 'th'
+A marker as following means a term begins with 'th'
 
             th*
  
- Likewise, a marker as following means a term ending with 'th' 
+ Likewise, a marker as following means a term ends with 'th' 
  
             *th
 
