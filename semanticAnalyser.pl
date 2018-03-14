@@ -37,15 +37,20 @@ sub segObeyRule {
 	my $temp = "";
 	
 	foreach my $marker(@markers){
-		#if ($marker =~ /^-:((\w|_)+)/){
-		#	$marker = "-".$var{$1};
-		#}elsif($marker =~ /^:((\w|_)+)/){
-		#	$marker = $var{$1};
-		#}
 		$marker =~ s/::((\w|_)+)/\($var{$1}\)/g;
 		if($marker !~ /^-/ && $marker !~ /^RRR$/){
-			#$marker = substr($marker,1);
-			if($marker !~ /[:'",.;%!?]/ ){#if marker does not contain one of these characters
+			my $exit = 0;
+			if($marker =~ /^\*/){
+				$marker =~ s/^\*\s*//;
+				$marker = "$marker\\b";
+				$exit = 1;
+			}elsif($marker =~ /\*$/){
+				$marker =~ s/\s*\*$//;
+				#print $marker;
+				$marker = "\\b$marker";
+				$exit = 1;
+				
+			}elsif($marker !~ /[:'",.;%!?]/ ){#if marker does not contain one of these characters
 				$marker = "\\b$marker\\b";#add bondaries side to the marker, \b to match the left or right bondary of the term in $marker
 			}
 			START:
@@ -53,7 +58,7 @@ sub segObeyRule {
 				my $aaa = $';
 				my $bbb = $&;
 				my $ccc = $`;
-				if ( ($bbb =~ /\w$/ && $aaa =~ /^\w/) || ($bbb =~ /^\w/ && $ccc =~ /\w$/) ){
+				if ( ($bbb =~ /\w$/ && $aaa =~ /^\w/ && $exit == 0 ) || ($bbb =~ /^\w/ && $ccc =~ /\w$/  && $exit == 0 ) ){
 						goto START;
 				}
 				my $between = $ccc;
@@ -336,7 +341,7 @@ while (my $file = readdir(DIR)) {
 						my ($segres,%results) = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
 						if( $results{-1} ne "none" ) {
 							if($segres ne ""){$segres = "<ul>".$segres."</ul>";}
-							my $s = "<li>".insertTags($seg,%results).$segres."</li>";
+							my $s = "\n<li>".insertTags($seg,%results).$segres."</li>";
 							$rescateg{uc($rc[1])} .= $s;
 							#print RR "<li>$s</li>\n";
 						}
