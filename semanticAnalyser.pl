@@ -11,13 +11,18 @@ open(RULES,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
 while(<RULES>){
 	my $rule = $_;
 	chomp($rule);
-	if ( $rule =~ /^\s*::((\w|_)+)\s*=\s*(.*)/){
-		 my $varname = $1; 
-		 my $varvalue = $3;
-		 $varvalue =~ s/\s+$//g;
-		 $varvalue =~ s/\s*\|/\|/g;
-		 $varvalue =~ s/\|\s*/|/g;
-		 $var{$varname} = $varvalue;
+	if( $rule !~ /^\s*$/){
+		$rule =~ s/\s+$//;
+		$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
+		$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
+		if ( $rule =~ /^\s*::((\w|_)+)\s*=\s*(.*)/){
+			 my $varname = $1; 
+			 my $varvalue = $3;
+			 $varvalue =~ s/\s+$//g;
+			 $varvalue =~ s/\s+\|/\|/g;
+			 $varvalue =~ s/\|\s+/|/g;
+			 $var{$varname} = $varvalue;
+		}
 	}
 }
 close(RULES);
