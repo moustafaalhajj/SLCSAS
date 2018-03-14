@@ -11,9 +11,10 @@ open(RULES,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
 while(<RULES>){
 	my $rule = $_;
 	chomp($rule);
-	if ( $rule =~ /^\s*::((\w|_)+)\s*=\s*(.*)\s*/){
+	if ( $rule =~ /^\s*::((\w|_)+)\s*=\s*(.*)/){
 		 my $varname = $1; 
 		 my $varvalue = $3;
+		 $varvalue =~ s/\s+$//g;
 		 $varvalue =~ s/\s*\|/\|/g;
 		 $varvalue =~ s/\|\s*/|/g;
 		 $var{$varname} = $varvalue;
@@ -38,6 +39,7 @@ sub segObeyRule {
 	
 	foreach my $marker(@markers){
 		$marker =~ s/::((\w|_)+)/\($var{$1}\)/g;
+		$marker =~ s/\x{061F}/?/g;
 		if($marker !~ /^-/ && $marker !~ /^RRR$/){
 			my $exit = 0;
 			if($marker =~ /^\*/){
@@ -50,7 +52,7 @@ sub segObeyRule {
 				$marker = "\\b$marker";
 				$exit = 1;
 				
-			}elsif($marker !~ /[:'",.;%!?]/ ){#if marker does not contain one of these characters
+			}elsif($marker !~ /[:'",.;%]/ ){#if marker does not contain one of these characters
 				$marker = "\\b$marker\\b";#add bondaries side to the marker, \b to match the left or right bondary of the term in $marker
 			}
 			START:
@@ -327,7 +329,7 @@ while (my $file = readdir(DIR)) {
 			}
 		}elsif ($g >= 5){
 			chomp($rule);
-			if ( $rule !~ /^\s*::((\w|_)+)\s*=\s*(.*)\s*/){
+			if ( $rule !~ /^\s*::((\w|_)+)\s*=\s*(.*)/){
 				if( $rule !~ /^\s*$/){
 					$rule =~ s/\s+$//;
 					$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
