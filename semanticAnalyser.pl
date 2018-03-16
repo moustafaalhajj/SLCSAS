@@ -108,7 +108,7 @@ sub segObeyRule {
 							$pos = $pos + ($o-length($between));
 						}
 					}
-					if( $between =~ /\b$negmarker\b/i ){
+					if( $between =~ /$negmarker/i ){
 						return ($segres,%failure);
 					}
 					
@@ -135,6 +135,15 @@ sub segObeyRule {
 
 		}elsif($marker =~ /^-/){
 			$negmarker = substr($marker,1);
+			if($negmarker =~ /^\*/){
+				$negmarker =~ s/^\*\s*//;
+				$negmarker = "$negmarker\\b";
+			}elsif($negmarker =~ /\*$/){
+				$negmarker =~ s/\s*\*$//;
+				$negmarker = "\\b$negmarker";
+			}elsif($negmarker !~ /[:'",.;%]/ ){
+				$marker = "\\b$negmarker\\b";
+			}
 		}elsif($marker =~ /RRR/){
 			$rrr = 1;
 		}
@@ -152,7 +161,7 @@ sub segObeyRule {
 			$seg = $1;
 			$gg = length($');
 		}
-		if( $seg =~ /\b$negmarker\b/i ){
+		if( $seg =~ /$negmarker/i ){
 			return ($segres,%failure);
 		}
 		$pos = $o+$m;
