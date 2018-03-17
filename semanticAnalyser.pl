@@ -5,6 +5,9 @@
 # where sentences satisfying rules are recognized. 
 use strict;
 
+#To represent a result summarizer
+my $countres = 0;
+
 #Read all variable from rules.txt and store value in an associative table %var
 my %var = ();
 open(RULES,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
@@ -53,10 +56,8 @@ sub segObeyRule {
 				$exit = 1;
 			}elsif($marker =~ /\*$/){
 				$marker =~ s/\s*\*$//;
-				#print $marker;
 				$marker = "\\b$marker";
 				$exit = 1;
-				
 			}elsif($marker !~ /[:'",.;%]/ ){#if marker does not contain one of these characters
 				$marker = "\\b$marker\\b";#add bondaries side to the marker, \b to match the left or right bondary of the term in $marker
 			}
@@ -96,6 +97,7 @@ sub segObeyRule {
 				
 				#####If there is a variable RRR to extract from $seg then keep $between in $segres
 				if($rrr == 1){
+					if (length($temp) <= 1 ){return ($segres,%failure);}
 					$segres .= "<li><span>".$temp."</span></li>"; 
 					$rrr = 0;
 				}
@@ -151,6 +153,7 @@ sub segObeyRule {
 	$temp = $seg;
 	#####If there is a variable RRR to extract from $seg then keep $between in $segres
 	if($rrr == 1){
+		if (length($temp) <= 1 ){return ($segres,%failure);}
 		$segres .= "<li><span>".$temp."</span></li>"; 
 		$rrr = 0;
 	}
@@ -270,7 +273,7 @@ while (my $file = readdir(DIR)) {
 	next unless (-f "$dir/$file");
 	next unless ($file =~ m/\.txt$/);
 	open(RR,">:encoding(UTF-8)","$dir"."results/"."$file.html") || die $!;
-	print RES "<li><a href='$dir"."results/"."$file.html'>$file</a></li>";
+	print RES "<li><a href='$dir"."results/"."$file.html'>$file</a>";
 	
 	open(RULES,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
 	$g = 0;
@@ -359,13 +362,23 @@ while (my $file = readdir(DIR)) {
 							if($segres ne ""){$segres = "<ul>".$segres."</ul>";}
 							my $s = "\n<li>".insertTags($seg,%results).$segres."</li>";
 							$rescateg{uc($rc[1])} .= $s;
-							#print RR "<li>$s</li>\n";
+							
+							$countres++;
+							
 						}
 					}
+
 				}
 			}
 		}
 	}
+	if ($countres != 0){
+		print RES " &nbsp;($countres)";
+		$countres = 0;
+	}
+	print RES "</li>";
+	
+	
 	foreach my $k (keys(%rescateg)) {
 		print RR "<h4>$k</h4>";
 		print RR "<ol  style='width:92%;'>	";
