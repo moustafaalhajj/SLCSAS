@@ -42,6 +42,8 @@ sub segObeyRule {
 	my $firstnegative = 1;
 	
 	my $rrr = 0;
+	my $countrrr = 0;
+	my $lengthrrr = 0;
 	my $segres = "";
 	my $temp = "";
 	
@@ -97,8 +99,10 @@ sub segObeyRule {
 				
 				#####If there is a variable RRR to extract from $seg then keep $between in $segres
 				if($rrr == 1){
-					if (length($temp) <= 1 ){return ($segres,%failure);}
-					$segres .= "<li><span>".$temp."</span></li>"; 
+					if (length($temp) > 1 ){
+						$segres .= "<li><span>".$temp."</span></li>"; 
+					}
+					$lengthrrr+=length($temp);
 					$rrr = 0;
 				}
 				if ($negmarker ne ""){
@@ -148,14 +152,20 @@ sub segObeyRule {
 			}
 		}elsif($marker =~ /RRR/){
 			$rrr = 1;
+			$countrrr++;
 		}
 	}
 	$temp = $seg;
 	#####If there is a variable RRR to extract from $seg then keep $between in $segres
 	if($rrr == 1){
-		if (length($temp) <= 1 ){return ($segres,%failure);}
-		$segres .= "<li><span>".$temp."</span></li>"; 
+		if (length($temp) > 1 ){
+			$segres .= "<li><span>".$temp."</span></li>"; 
+		}
+		$lengthrrr+=length($temp);
 		$rrr = 0;
+	}
+	if($lengthrrr <= $countrrr){
+		return ($segres,%failure);
 	}
 	
 	if( $negmarker ne "" ){
@@ -347,7 +357,7 @@ while (my $file = readdir(DIR)) {
 		}elsif ($g >= 5){
 			chomp($rule);
 			if ( $rule !~ /^\s*::((\w|_)+)\s*=\s*(.*)/){
-				if( $rule !~ /^\s*$/){
+				if( $rule !~ /^\s*$/ && $rule !~ /^#/){
 					$rule =~ s/\s+$//;
 					$rule =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
 					$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
