@@ -40,7 +40,7 @@ Then it can be used as it, for example:
             -does not>::verb_citation -> citation
             
             
- To extract from the sentences one or more excerpts use RRR instead of marker, for example to extract the part after "that": 
+ To extract from the sentences one or more excerpts, use RRR instead of marker, but if the excerpt from a sentence is empty then the rule is considered not applicable to this sentence, therefore there is no result from this sentence. For example to extract the part after "that": 
  
             -does not>::verb_citation>RRR -> citation
  
