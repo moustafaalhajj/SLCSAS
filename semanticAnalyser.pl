@@ -5,6 +5,8 @@
 # where sentences satisfying rules are recognized. 
 use strict;
 
+#open(rerere,">:encoding(UTF-8)","fdffd.txt") || die $!;
+
 #To represent a result summarizer
 my $countres = 0;
 
@@ -44,7 +46,7 @@ sub segObeyRule {
 	my $rrr = 0;
 	my $countrrr = 0;
 	my $lengthrrr = 0;
-	my $segres = "";
+	#my $segres = "";
 	my $temp = "";
 	
 	foreach my $marker(@markers){
@@ -84,23 +86,34 @@ sub segObeyRule {
 				while ($between =~ /\b\w+\b/g ){
 					$cw++;
 				}
-				if( $cw > $max_dist_positive && $firstpositive == 0){ return ($segres,%failure); }
+				if( $cw > $max_dist_positive && $firstpositive == 0){ return (%failure); }
 				####################
-				if($marks{$o}=~/^<\/[pn]/){
+				if($marks{$o}=~/^<\/[spn]/){
 					$marks{$o} .= "<positive style='background-color:yellow;'>";
 				}else{
 					$marks{$o} = "<positive style='background-color:yellow;'>".$marks{$o};
 				}
-				if($marks{$t}=~/^<\/[pn]/){
+				if($marks{$t}=~/^<\/[spn]/){
 					$marks{$t} .= "</positive>";
 				}else{
 					$marks{$t} = "</positive>".$marks{$t};
 				}
 				
-				#####If there is a variable RRR to extract from $seg then keep $between in $segres
+				#####If there is a variable RRR to extract from $seg underline double them
 				if($rrr == 1){
 					if (length($temp) > 1 ){
-						$segres .= "<li><span>".$temp."</span></li>"; 
+						if($marks{$o-$n}=~/^<\/[spn]/){
+							$marks{$o-$n} .= "<span style='text-decoration: underline double;'>";
+						}else{
+							$marks{$o-$n} = "<span style='text-decoration: underline double;'>".$marks{$o-$m};
+						}
+						if($marks{$o}=~/^<\/[spn]/){
+							$marks{$o} .= "</span>";
+						}else{
+							$marks{$o} = "</span>".$marks{$o};
+						}
+						
+						#$segres .= "<li><span>".$temp."</span></li>"; 
 					}
 					$lengthrrr+=length($temp);
 					$rrr = 0;
@@ -115,16 +128,16 @@ sub segObeyRule {
 						}
 					}
 					if( $between =~ /$negmarker/i ){
-						return ($segres,%failure);
+						return (%failure);
 					}
 					
 					if($between ne ""){
-						if($marks{$pos}=~/^<\/[pn]/){
+						if($marks{$pos}=~/^<\/[spn]/){
 							$marks{$pos} .= "<negative class='tooltip'><NO-marker class='tooltiptext'>$negmarker</NO-marker>";
 						}else{
 							$marks{$pos} = "<negative class='tooltip'><NO-marker class='tooltiptext'>$negmarker</NO-marker>".$marks{$pos};
 						}
-						if($marks{$o}=~/^<\/[pn]/){
+						if($marks{$o}=~/^<\/[spn]/){
 							$marks{$o} .= "</negative>";
 						}else{
 							$marks{$o} = "</negative>".$marks{$o};
@@ -136,7 +149,7 @@ sub segObeyRule {
 					$firstpositive = 0;
      			}
 			}else{
-				return ($segres,%failure);
+				return (%failure);
 			}
 
 		}elsif($marker =~ /^-/){
@@ -156,16 +169,29 @@ sub segObeyRule {
 		}
 	}
 	$temp = $seg;
-	#####If there is a variable RRR to extract from $seg then keep $between in $segres
+	#####If there is a variable RRR to extract from $seg then underline double them
 	if($rrr == 1){
 		if (length($temp) > 1 ){
-			$segres .= "<li><span>".$temp."</span></li>"; 
+			my $position = $o+$m;
+			if($marks{$position}=~/^<\/[spn]/){
+				$marks{$position} .= "<span style='text-decoration: underline double;'>";
+			}else{
+				$marks{$position} = "<span style='text-decoration: underline double;'>".$marks{$position};
+			}
+			$position = $o+$m+$r;
+			if($marks{$position}=~/^<\/[spn]/){
+				$marks{$position} .= "</span>";
+			}else{
+				$marks{$position} = "</span>".$marks{$position};
+			}
+			
+			#$segres .= "<li><span>".$temp."</span></li>"; 
 		}
 		$lengthrrr+=length($temp);
 		$rrr = 0;
 	}
 	if($lengthrrr <= $countrrr){
-		return ($segres,%failure);
+		return (%failure);
 	}
 	
 	if( $negmarker ne "" ){
@@ -175,25 +201,24 @@ sub segObeyRule {
 			$gg = length($');
 		}
 		if( $seg =~ /$negmarker/i ){
-			return ($segres,%failure);
+			return (%failure);
 		}
 		$pos = $o+$m;
 		if($seg ne ""){
-			if($marks{$pos}=~/^<\/[pn]/){
+			if($marks{$pos}=~/^<\/[spn]/){
 				$marks{$pos} .= "<negative class='tooltip'><NO-marker class='tooltiptext'>$negmarker</NO-marker>";
 			}else{
 				$marks{$pos} = "<negative class='tooltip'><NO-marker class='tooltiptext'>$negmarker</NO-marker>".$marks{$pos};
 			}
 			$pos = $o+$m+$r-$gg;
-			if($marks{$pos}=~/^<\/[pn]/){
+			if($marks{$pos}=~/^<\/[spn]/){
 				$marks{$pos} .= "</negative>" ;
 			}else{
 				$marks{$pos} = "</negative>".$marks{$pos} ;
 			}
 		}
 	}
-	
-	return ($segres,%marks); 
+	return (%marks); 
 }
 
 sub insertTags{
@@ -204,8 +229,13 @@ sub insertTags{
 		}
 	}
 	foreach my $pos (sort {$b <=> $a} keys %positions){
-		substr($str, $pos, 0) = $positions{$pos};
+		my $position = $positions{$pos};
+		$position =~ s/<\/span><positive style='background-color:yellow;'><\/negative>/<\/negative><\/span><positive style='background-color:yellow;'>/;
+		$position =~ s/<\/span><positive style='background-color:yellow;'><\/negative>/<\/negative><\/span><positive style='background-color:yellow;'>/;
+		#print rerere "$position\n";
+		substr($str, $pos, 0) = $position;
 	}
+	#print rerere "\n";
 	return $str;
 }
 sub sentencesEn{
@@ -242,10 +272,6 @@ sub readtext{
 	return ($origtext,@segments);
 }
 
-
-
-
-
 #Create and open file results.html to write all results 
 open(RES,">:encoding(UTF-8)","results.html");
 print RES "<html>
@@ -276,7 +302,6 @@ mkdir $existingdir unless -d $existingdir;
 mkdir $dirresult unless -d $dirresult;
 
 my $dir = 'corpus/';
-
 
 opendir(DIR, $dir) or die $!;
 while (my $file = readdir(DIR)) {
@@ -309,6 +334,8 @@ while (my $file = readdir(DIR)) {
 		display: inline-block;
 		border-bottom: 1px dotted black;
 		background-color:rgba(255,65,0,1);
+		
+		text-decoration: inherit;
 	}
 	.tooltip .tooltiptext {
 		visibility: hidden;
@@ -355,6 +382,7 @@ while (my $file = readdir(DIR)) {
 				$max_dist_negative = $4;
 			}
 		}elsif ($g >= 5){
+			
 			chomp($rule);
 			if ( $rule !~ /^\s*::((\w|_)+)\s*=\s*(.*)/){
 				if( $rule !~ /^\s*$/ && $rule !~ /^#/){
@@ -363,21 +391,18 @@ while (my $file = readdir(DIR)) {
 					$rule =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
 					
 					my @rc = split(/\s*-\s*>\s*/,$rule);
-					
-					
 					my @markers = split(/\s*>\s*/,$rc[0]);
+					
 					foreach my $seg ( @segments ){
-						my ($segres,%results) = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
+						print "|";
+						my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
 						if( $results{-1} ne "none" ) {
-							if($segres ne ""){$segres = "<ul>".$segres."</ul>";}
-							my $s = "\n<li>".insertTags($seg,%results).$segres."</li>";
+							#if($segres ne ""){$segres = "<ul>".$segres."</ul>";}
+							my $s = "\n<li>".insertTags($seg,%results)."</li>";
 							$rescateg{uc($rc[1])} .= $s;
-							
 							$countres++;
-							
 						}
 					}
-
 				}
 			}
 		}
@@ -412,5 +437,6 @@ print RES "</ol>
 </body>
 </html>";
 close(RES);
+#close(rerere);
 my $display = `start "" results.html`;
 exit;
