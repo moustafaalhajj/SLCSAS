@@ -55,7 +55,7 @@ A marker as following means a term begins with 'th', don't use it in the value o
 
 ## Output of the program
 
-HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts form sentences are puted below sentences in the result. 
+HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts form sentences are double underlined in sentences' result. 
 
 This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
