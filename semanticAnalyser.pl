@@ -5,8 +5,6 @@
 # where sentences satisfying rules are recognized. 
 use strict;
 
-#open(rerere,">:encoding(UTF-8)","fdffd.txt") || die $!;
-
 #To represent a result summarizer
 my $countres = 0;
 
@@ -32,7 +30,6 @@ while(<RULES>){
 }
 close(RULES);
 
-
 #segObeyRule: For a given $seg and a given @markers this function tests if the list of positive markers in @markers is belonged to $seg and the list of negative markers does not belonged to $seg respecting the order of markers in @markers
 sub segObeyRule {
 	my %failure = (-1=>"none");
@@ -52,6 +49,7 @@ sub segObeyRule {
 	foreach my $marker(@markers){
 		$marker =~ s/::((\w|_)+)/\($var{$1}\)/g;
 		$marker =~ s/\x{061F}/?/g;
+		
 		if($marker !~ /^-/ && $marker !~ /^RRR$/){
 			my $exit = 0;
 			if($marker =~ /^\*/){
@@ -86,9 +84,11 @@ sub segObeyRule {
 				while ($between =~ /\b\w+\b/g ){
 					$cw++;
 				}
-				if( $cw > $max_dist_positive && $firstpositive == 0){ return (%failure); }
+				
+				if( $cw > $max_dist_positive && $firstpositive == 0){return (%failure); }
 				####################
 				if($marks{$o}=~/^<\/[spn]/){
+					
 					$marks{$o} .= "<positive style='background-color:yellow;'>";
 				}else{
 					$marks{$o} = "<positive style='background-color:yellow;'>".$marks{$o};
@@ -133,6 +133,7 @@ sub segObeyRule {
 					
 					if($between ne ""){
 						if($marks{$pos}=~/^<\/[spn]/){
+							
 							$marks{$pos} .= "<negative class='tooltip'><NO-marker class='tooltiptext'>$negmarker</NO-marker>";
 						}else{
 							$marks{$pos} = "<negative class='tooltip'><NO-marker class='tooltiptext'>$negmarker</NO-marker>".$marks{$pos};
@@ -190,7 +191,7 @@ sub segObeyRule {
 		$lengthrrr+=length($temp);
 		$rrr = 0;
 	}
-	if($lengthrrr <= $countrrr){
+	if(($lengthrrr != 0 && $countrrr != 0) && ($lengthrrr <= $countrrr)){
 		return (%failure);
 	}
 	
@@ -397,6 +398,7 @@ while (my $file = readdir(DIR)) {
 						print "|";
 						my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
 						if( $results{-1} ne "none" ) {
+							
 							#if($segres ne ""){$segres = "<ul>".$segres."</ul>";}
 							my $s = "\n<li>".insertTags($seg,%results)."</li>";
 							$rescateg{uc($rc[1])} .= $s;
