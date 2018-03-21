@@ -191,7 +191,7 @@ sub segObeyRule {
 		$lengthrrr+=length($temp);
 		$rrr = 0;
 	}
-	if(($lengthrrr != 0 && $countrrr != 0) && ($lengthrrr <= $countrrr)){
+	if(($countrrr != 0) && ($lengthrrr <= $countrrr)){
 		return (%failure);
 	}
 	
