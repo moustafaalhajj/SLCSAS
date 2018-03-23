@@ -1,12 +1,20 @@
-#Enter rules starting at the fifth line, one rule by line. Use '>' to separate markers, use '-' before every negative marker, use '->' between rule and semantic category
+#Enter rules 
 lang = fr #(en,ar,fr)
-max_distance_positive = 20 #distance in number of words that separates two consecutive positive markers 
-max_distance_negative = 12 #distance in number of words that seperates negative markers from positive markers only at the beginning and at the end of sentences
+max_distance_positive = 20 #maximal distance in number of words between two consecutive positive markers
+max_distance_negative = 12 #length of 
+
 ::verbeCitation1 = (dit|annoncé|déclaré|révélé|estimé|avertit|relayé|affirmé)(e)?
+
 ::verbeCitation2 = (disait|annoncait|déclarait|révélait|estimait|affirmait)
--n'a pas>::verbeCitation1>(que|:"|"|:)>RRR -> citation
--ne>::verbeCitation2>(que|:"|"|:)>RRR -> citation
-(n|c)'est>pas>bien -> opinion negative
--n'>est>-pas>bien -> opinion positive
+
+-n'a pas > ::verbeCitation1> (que|:"|"|:) > RRR -> citation
+
+-ne > ::verbeCitation2 > (que|:"|"|:) > RRR -> citation
+
+(n|c)'est > pas> bien -> opinion negative
+
+-n' > est > -pas> bien -> opinion positive
+
 (c|n)'est pas mal -> opinion positive
--n'>est>-pas>mal -> opinion negative
+
+-n' > est> -pas >mal -> opinion negative
