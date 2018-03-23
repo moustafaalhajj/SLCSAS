@@ -7,9 +7,9 @@ max_distance_negative = 12 # Research space length (in number of words) of negat
 
 ::verbeCitation2 = (disait|annoncait|déclarait|révélait|estimait|affirmait)
 
--n'a pas > ::verbeCitation1> (que|:"|"|:) > RRR -> citation
+-n'a pas > ::verbeCitation1> ( que | :" | " | : ) > RRR -> citation
 
--ne > ::verbeCitation2 > (que|:"|"|:) > RRR -> citation
+-ne > ::verbeCitation2 > ( que |:" | " | : ) > RRR -> citation
 
 (n|c)'est > pas> bien -> opinion negative
 
