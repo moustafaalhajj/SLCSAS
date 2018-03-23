@@ -1,7 +1,7 @@
 #Enter rules 
 lang = fr #(en,ar,fr)
-max_distance_positive = 20 #maximal distance in number of words between two consecutive positive markers
-max_distance_negative = 12 #length of 
+max_distance_positive = 20 # Maximal distance (in number of words) between two consecutive positive markers
+max_distance_negative = 12 # Research space length (in number of words) of negative marker 
 
 ::verbeCitation1 = (dit|annoncé|déclaré|révélé|estimé|avertit|relayé|affirmé)(e)?
 
