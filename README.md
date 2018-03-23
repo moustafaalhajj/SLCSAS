@@ -1,5 +1,5 @@
 # Semantic Analyser
-This program is made for linguistics researchers, who create linguistic rules and want to extract and classify sentences following a set of semantic categories.
+This program is made for linguistics researchers, who create linguistic rules and want to extract, classify sentences following a set of semantic categories, it can also be used to recognize entities in the text.
 
 This program extracts, from a corpus of arabic, french or english documents, sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlited in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
 
