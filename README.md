@@ -9,7 +9,7 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
    2. A set of linguistic rules defined in the file 'rules.txt' in the following format:
 
-          PM or -NM>PM or -NM>etc. -> SC
+          PM or -NM > PM or -NM > etc. -> SC
 
 Where 
 
@@ -29,15 +29,15 @@ For example, to write the following linguistic rule for the semantic category 'C
 
 one should write the following rule: 
       
-             -does not>said>that -> citation
+             -does not > said > that -> citation
 
 Variabe ::verb_citation can be defined like this 
 
-            ::verb_citation = said|told|declared|announced|pronounced
+            ::verb_citation = said | told | declared | announced | pronounced
 
 Then it can be used as it, for example: 
 
-            -does not>::verb_citation -> citation
+            -does not > ::verb_citation -> citation
             
             
  To extract from the sentences one or more excerpts, use RRR instead of marker, if all excerpts are empty then the rule is not applicable to this sentence, therefore there is no result. For example to extract the part after "that": 
@@ -55,7 +55,7 @@ A marker as following means a term begins with 'th', don't use it in the value o
 
 ## Output of the program
 
-HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts form sentences are double underlined in sentences' result. 
+HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts form sentences are underlined in sentences' result. 
 
 This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
 
