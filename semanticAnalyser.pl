@@ -103,9 +103,9 @@ sub segObeyRule {
 				if($rrr == 1){
 					if (length($temp) > 1 ){
 						if($marks{$o-$n}=~/^<\/[spn]/){
-							$marks{$o-$n} .= "<span style='text-decoration: underline double;'>";
+							$marks{$o-$n} .= "<span style='text-decoration-line:  underline;text-decoration-style: solid;'>";
 						}else{
-							$marks{$o-$n} = "<span style='text-decoration: underline double;'>".$marks{$o-$m};
+							$marks{$o-$n} = "<span style='text-decoration-line:  underline;text-decoration-style: solid;'>".$marks{$o-$m};
 						}
 						if($marks{$o}=~/^<\/[spn]/){
 							$marks{$o} .= "</span>";
@@ -175,9 +175,9 @@ sub segObeyRule {
 		if (length($temp) > 1 ){
 			my $position = $o+$m;
 			if($marks{$position}=~/^<\/[spn]/){
-				$marks{$position} .= "<span style='text-decoration: underline double;'>";
+				$marks{$position} .= "<span style='text-decoration-line:  underline;text-decoration-style: solid;'>";
 			}else{
-				$marks{$position} = "<span style='text-decoration: underline double;'>".$marks{$position};
+				$marks{$position} = "<span style='text-decoration-line:  underline;text-decoration-style: solid;'>".$marks{$position};
 			}
 			$position = $o+$m+$r;
 			if($marks{$position}=~/^<\/[spn]/){
@@ -356,9 +356,51 @@ while (my $file = readdir(DIR)) {
 		visibility: visible;
 	}
 	ol li{white-space:pre-wrap;text-align:justify;}
-	ol li ul {border: 1px solid red;}
 	
 	h4{font-family: Verdana, Arial, Helvetica, sans-serif;color: #6600FF;}
+	
+	.toggle-box {
+  display: none;
+}
+
+.toggle-box + label {
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  line-height: 21px;
+  margin-bottom: 5px;
+}
+
+.toggle-box + label + div {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div {
+  display: block;
+}
+
+.toggle-box + label:before {
+  background-color: #4F5150;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  color: #FFFFFF;
+  content: '+';
+  display: block;
+  float: $direction;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  width: 20px;
+}
+
+.toggle-box:checked + label:before {
+  content: \"\\2212\";
+}
 	</style>
 	</head>
 	 <body dir=$lang";
@@ -416,11 +458,16 @@ while (my $file = readdir(DIR)) {
 	print RES "</li>";
 	
 	
+	my $idf = 0;
 	foreach my $k (keys(%rescateg)) {
-		print RR "<h4>$k</h4>";
+		$idf++;
+		my $forli = $rescateg{$k};
+		my $nbreli = 0;
+		while($forli =~ /<li>/g){$nbreli++;}
+		print RR "<input class='toggle-box' id='identifier-$idf' type='checkbox' ><label for='identifier-$idf'><h4>$k ($nbreli)</h4></label><div>";
 		print RR "<ol  style='width:92%;'>	";
 		print RR $rescateg{$k};
-		print RR "</ol>\n	";
+		print RR "</ol></div>\n	";
 	}
 	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>ORIGINAL TEXT</h2>";
 	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>
