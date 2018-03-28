@@ -11,10 +11,10 @@ max_distance_negative = 12 # Research space length (in number of words) of negat
 
 -ne > ::verbeCitation2 > ( que |:" | " | : ) > RRR -> citation
 
-(n|c)'est > pas> bien -> opinion negative
+(n|c)'est > pas> bien -> opinion_negatif
 
--n' > est > -pas> bien -> opinion positive
+-n' > est > -pas> bien -> opinion_positif
 
-(c|n)'est pas mal -> opinion positive
+(c|n)'est pas mal -> opinion_positif
 
--n' > est> -pas >mal -> opinion negative
+-n' > est> -pas >mal -> opinion_negatif
