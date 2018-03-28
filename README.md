@@ -6,6 +6,10 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 ## Input of the program
 
    1. Text files .txt stored in the 'corpus' directory
+   
+   3. The semantic card stored in the file "semanticCard.txt" in the following format:
+   
+          root (citation|opinion_negative|opinion_positive)
 
    2. A set of linguistic rules defined in the file 'rules.txt' in the following format:
 
@@ -15,9 +19,9 @@ Where
 
         PM: a Positive Marker
 
-        AM: a Negative Marker
+        AM: a Negative Marker 
 
-        SC: a Semantic Category
+        SC: a Semantic Category (don't use space in the name of semantic category)
 
         Note the use of '-' symbol before negative markers,
         '>' symbol to indicate 'followed by' 
@@ -53,10 +57,6 @@ A marker as following means a term begins with 'th', don't use it in the value o
  
             *th
             
-   3. The semantic card stored in the file "semanticCard.txt" in the following format:
-   
-            root (citation|opinion_negative|opinion_positive)
-
 ## Output of the program
 
 HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts form sentences are underlined in sentences' result. 
