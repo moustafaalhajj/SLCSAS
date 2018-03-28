@@ -84,7 +84,7 @@ This program splits texts into sentences and then researches in sentences positi
    
    5. Create 'semanticMap.txt' (you can download it) and put into it the semantic map, here is an example: 
          
-            root(citation|opinion_negative|opinion_positive)
+            root (citation|opinion_negative|opinion_positive)
    
    6. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser
    
