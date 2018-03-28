@@ -32,9 +32,9 @@ close(RULES);
 
 
 
-#########To read semantic card###########
-sub semanticCard{
-	open(CARD,"<:encoding(UTF-8)","semanticCard.txt") || die "Problem in opening semanticCard.txt";
+#########To read semantic map###########
+sub semanticMap{
+	open(CARD,"<:encoding(UTF-8)","semanticMap.txt") || die "Problem in opening semanticMap.txt";
 	my $line;
 	my $all = "";
 	while(<CARD>){
@@ -67,7 +67,7 @@ sub semanticCard{
 	return $all;
 }
 
-my $tree = semanticCard();
+my $tree = semanticMap();
 
 open(RLS,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
 my $rrule = <RLS>;
