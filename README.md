@@ -7,7 +7,7 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
    1. Text files .txt stored in the 'corpus' directory
    
-   3. The semantic card stored in the file "semanticCard.txt" in the following format:
+   3. The semantic card stored in the file "semanticCard.txt" in the following format (don't use space in the name of a concept)
    
           root (citation|opinion_negative|opinion_positive)
 
@@ -79,7 +79,9 @@ This program splits texts into sentences and then researches in sentences positi
            lang = en #(en,ar,fr)
            max_distance_positive = 20 #the max distance (in number of words) separating two consecutive positive markers
            max_distance_negative = 12 #the min distance (in number of words) seperating negative markers from positive markers. max_distance_negative is only considered when negative markers appear at the begining and at the end of rules, otherwise for negative markers between positive markers max_distance_negative is not considered.
+           
            -doesn't > said > that -> citation
+   
    5. Create 'semanticCard.txt' (you can download it) and put into it the semantic card, here is an example: 
          
             root(citation|opinion_negative|opinion_positive)
@@ -89,5 +91,3 @@ This program splits texts into sentences and then researches in sentences positi
 Enjoy ...
 
 If you require any further information, feel free to contact me at moustafa DOT al-hajj AT gmail DOT com
-
- 
