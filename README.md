@@ -1,5 +1,5 @@
 # Semantic Analyser
-This program is made for linguistics researchers, who create linguistic rules and want to extract and classify sentences following a set of semantic categories. The program classifies sentences within a defined semantic card. It can be used to recognize entities in the text.
+This program is made for linguistics researchers, who create linguistic rules and want to extract and classify sentences following a set of semantic categories. The program classifies sentences within a defined semantic map. It can be used to recognize entities in the text.
 
 This program extracts, from a corpus of arabic, french or english documents, sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlited in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
 
@@ -7,7 +7,7 @@ This program extracts, from a corpus of arabic, french or english documents, sen
 
    1. Text files .txt stored in the 'corpus' directory
    
-   3. The semantic card stored in the file "semanticCard.txt" in the following format (don't use space in the name of a concept)
+   3. The semantic map stored in the file "semanticMap.txt" in the following format (don't use space in the name of a concept)
    
           root (citation|opinion_negative|opinion_positive)
 
@@ -82,7 +82,7 @@ This program splits texts into sentences and then researches in sentences positi
            
            -doesn't > said > that -> citation
    
-   5. Create 'semanticCard.txt' (you can download it) and put into it the semantic card, here is an example: 
+   5. Create 'semanticMap.txt' (you can download it) and put into it the semantic map, here is an example: 
          
             root(citation|opinion_negative|opinion_positive)
    
