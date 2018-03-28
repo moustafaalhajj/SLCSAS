@@ -1,2 +1,3 @@
-﻿SEMANTIC CARD
+SEMANTIC CARD
 root (citation|opinion_negative|opinion_positive)
+citation (direct|indirect)
