@@ -1,20 +1,24 @@
-#Enter rules 
-lang = fr #(en,ar,fr)
-max_distance_positive = 20 # Maximal distance (in number of words) between two consecutive positive markers
-max_distance_negative = 12 # Research space length (in number of words) of negative marker 
+RULES
+lang = fr 
+max_distance_positive = 20
+max_distance_negative = 3
 
 ::verbeCitation1 = (dit|annoncé|déclaré|révélé|estimé|avertit|relayé|affirmé)(e)?
 
 ::verbeCitation2 = (disait|annoncait|déclarait|révélait|estimait|affirmait)
 
--n'a pas > ::verbeCitation1> ( que | :" | " | : ) > RRR -> citation
+-n'a pas > ::verbeCitation1 > (:"|"|:) > RRR -> direct
 
--ne > ::verbeCitation2 > ( que |:" | " | : ) > RRR -> citation
+-n'a pas > ::verbeCitation1 > que > RRR -> indirect
 
-(n|c)'est > pas> bien -> opinion_negatif
+-ne>::verbeCitation2 > (:"|"|:) > RRR -> direct
 
--n' > est > -pas> bien -> opinion_positif
+-ne>::verbeCitation2 > que > RRR -> indirect
 
-(c|n)'est pas mal -> opinion_positif
+(n|c)'est>pas>bien -> opinion_negative
 
--n' > est> -pas >mal -> opinion_negatif
+-n'>est>-pas>bien -> opinion_positive
+
+(c|n)'est pas mal -> opinion_positive
+
+-n'>est>-pas>mal -> opinion_negative
