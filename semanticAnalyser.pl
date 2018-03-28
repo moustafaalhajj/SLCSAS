@@ -66,6 +66,7 @@ sub semanticCard{
 	close(CARD);
 	return $all;
 }
+
 my $tree = semanticCard();
 
 open(RLS,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
@@ -113,7 +114,7 @@ sub addol{
 		$res .= $rescateg{$k};
 		$res .= "<\/ol></div>";
 	}else{
-		$tochange =~ s/<h4>((\w|_)+)<\/h4><\/label>/<h4>$1 \(0\)<\/h4><\/label>/;
+		$tochange =~ s/<h4>((\w|_)+)<\/h4><\/label>/<h4>$1<\/h4><\/label>/;
 		$res = $tochange;
 	}
 	return $res;
