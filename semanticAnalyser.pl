@@ -30,6 +30,81 @@ while(<RULES>){
 }
 close(RULES);
 
+
+
+#########To read semantic card###########
+sub semanticCard{
+	open(CARD,"<:encoding(UTF-8)","semanticCard.txt") || die "Opening file problem";
+	my $line;
+	my $all = "";
+	while(<CARD>){
+		$line++;
+		if($line >= 2){
+			my $branch = $_;
+			chomp($branch);
+			if( $branch !~ /^\s*$/){
+				$branch = uc($branch);
+				$branch =~ s/\s+$//;
+				$branch =~ s/^\s+//;
+				$branch =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
+				$branch =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
+				if ( $branch =~ /^((\w|_)+)\s*\(((\w|_|\|)+)\)$/ ){
+					my $con = $1;
+					my $modele = $3;
+					$modele =~ s/\s+\|/\|/g;
+					$modele =~ s/\|\s+/\|/g;
+					$modele =~ s/\|/,/g;
+					if($all eq ""){
+						$all = $con."($modele)";
+					}else{
+						$all =~ s/$con/$con\($modele\)/g; 
+					}
+				}
+			}
+		}
+	}
+	close(CARD);
+	return $all;
+}
+my $tree = semanticCard();
+$tree =~ s/,/,,,/g;
+$tree =~ s/((\w|_)+)/changeatfirst($1)/eg;
+$tree =~ s/\)/<\/div>/g;
+$tree =~ s/\(/<div style='margin-left:12px'>/g;
+$tree =~ s/,,,//g;
+
+
+my $id = 0;
+sub changeatfirst{
+	my $conc = shift;
+	my $nbreli = 0;
+	$id++;
+	#while($conc =~ /<li>/g){$nbreli++;}
+	my $res = "<input class='toggle-box' id='$conc$id' type='checkbox' >
+			<label for='$conc$id'><h4>$conc<\/h4><\/label>\n";
+	return $res;
+}
+
+sub addol{
+	my ($tochange,$k,%rescateg) = @_;
+	my $res;
+	if(exists $rescateg{$k}){
+		my $forli = $rescateg{$k};
+		my $nbreli = 0;
+		while($forli =~ /<li>/g){$nbreli++;}
+		$tochange =~ s/<h4>((\w|_)+)<\/h4><\/label>/<h4>$1 \($nbreli\)<\/h4><\/label>/;
+		$res = $tochange;
+		$res .= "<div><ol  style='width:92%;'>";
+		$res .= $rescateg{$k};
+		$res .= "<\/ol></div>";
+	}else{
+		$tochange =~ s/<h4>((\w|_)+)<\/h4><\/label>/<h4>$1 \(0\)<\/h4><\/label>/;
+		$res = $tochange;
+	}
+	return $res;
+}
+
+
 #segObeyRule: For a given $seg and a given @markers this function tests if the list of positive markers in @markers is belonged to $seg and the list of negative markers does not belonged to $seg respecting the order of markers in @markers
 sub segObeyRule {
 	my %failure = (-1=>"none");
@@ -458,17 +533,39 @@ while (my $file = readdir(DIR)) {
 	print RES "</li>";
 	
 	
-	my $idf = 0;
-	foreach my $k (keys(%rescateg)) {
-		$idf++;
-		my $forli = $rescateg{$k};
-		my $nbreli = 0;
-		while($forli =~ /<li>/g){$nbreli++;}
-		print RR "<input class='toggle-box' id='identifier-$idf' type='checkbox' ><label for='identifier-$idf'><h4>$k ($nbreli)</h4></label><div>";
-		print RR "<ol  style='width:92%;'>	";
-		print RR $rescateg{$k};
-		print RR "</ol></div>\n	";
+	
+	
+	my $tr = $tree;
+	while( $tree =~ /<h4>((\w|_)+)<\/h4><\/label>/g){
+		my $conc = $1;
+		my $tochange = $&;
+		$tr =~ s/$tochange/addol($tochange,$conc,%rescateg)/e;
 	}
+	
+	print RR $tr;
+	
+	
+	#my $idf = 0;
+	#foreach my $k (keys(%rescateg)) {
+	#	$idf++;
+	#	my $forli = $rescateg{$k};
+	#	my $nbreli = 0;
+	#	while($forli =~ /<li>/g){$nbreli++;}
+	#	print RR "<input class='toggle-box' id='identifier-$idf' type='checkbox' ><label for='identifier-$idf'><h4>$k ($nbreli)</h4></label><div>";
+	#	print RR "<ol  style='width:92%;'>	";
+	#	print RR $rescateg{$k};
+	#	print RR "</ol></div>\n	";
+	#}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>ORIGINAL TEXT</h2>";
 	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>
 	<br><br>
