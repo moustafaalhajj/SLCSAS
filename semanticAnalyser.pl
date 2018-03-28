@@ -34,7 +34,7 @@ close(RULES);
 
 #########To read semantic card###########
 sub semanticCard{
-	open(CARD,"<:encoding(UTF-8)","semanticCard.txt") || die "Opening file problem";
+	open(CARD,"<:encoding(UTF-8)","semanticCard.txt") || die "Problem in opening semanticCard.txt";
 	my $line;
 	my $all = "";
 	while(<CARD>){
@@ -67,10 +67,25 @@ sub semanticCard{
 	return $all;
 }
 my $tree = semanticCard();
+
+open(RLS,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
+my $rrule = <RLS>;
+$rrule = <RLS>;
+chomp($rrule);
+my $lg;
+if($rrule=~ /(\s+)?lang(\s+)?=(\s+)?(\w+)(\s+)?/){
+	$lg = $4;
+}
+close(RLS);
+
 $tree =~ s/,/,,,/g;
 $tree =~ s/((\w|_)+)/changeatfirst($1)/eg;
 $tree =~ s/\)/<\/div>/g;
-$tree =~ s/\(/<div style='margin-left:12px'>/g;
+if($lg eq "ar"){
+	$tree =~ s/\(/<div style='margin-right:12px;'>/g;
+}else{
+	$tree =~ s/\(/<div style='margin-left:12px;'>/g;
+}
 $tree =~ s/,,,//g;
 
 
@@ -397,6 +412,12 @@ while (my $file = readdir(DIR)) {
 				$lang = $4;
 				($origtext,@segments) = readtext("$dir$file",$lang);
 			}
+			
+			
+
+			
+			
+			
 			if ($lang eq "ar"){$lang = "rtl";$direction="right"}else{$lang = "ltr";$direction="left";}
 			print RR "<html>
 	<head>
@@ -515,7 +536,6 @@ while (my $file = readdir(DIR)) {
 						print "|";
 						my %results = segObeyRule($seg,$max_dist_positive,$max_dist_negative,@markers);
 						if( $results{-1} ne "none" ) {
-							
 							#if($segres ne ""){$segres = "<ul>".$segres."</ul>";}
 							my $s = "\n<li>".insertTags($seg,%results)."</li>";
 							$rescateg{uc($rc[1])} .= $s;
@@ -532,19 +552,13 @@ while (my $file = readdir(DIR)) {
 	}
 	print RES "</li>";
 	
-	
-	
-	
 	my $tr = $tree;
 	while( $tree =~ /<h4>((\w|_)+)<\/h4><\/label>/g){
 		my $conc = $1;
 		my $tochange = $&;
 		$tr =~ s/$tochange/addol($tochange,$conc,%rescateg)/e;
 	}
-	
 	print RR $tr;
-	
-	
 	#my $idf = 0;
 	#foreach my $k (keys(%rescateg)) {
 	#	$idf++;
@@ -556,15 +570,6 @@ while (my $file = readdir(DIR)) {
 	#	print RR $rescateg{$k};
 	#	print RR "</ol></div>\n	";
 	#}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>ORIGINAL TEXT</h2>";
 	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>
