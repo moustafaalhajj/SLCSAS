@@ -1,0 +1,2 @@
+﻿SEMANTIC CARD
+root (citation|opinion_negative|opinion_positive)
