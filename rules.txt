@@ -11,14 +11,14 @@ max_distance_negative = 3
 
 -n'a pas > ::verbeCitation1 > que > RRR -> indirect
 
--ne>::verbeCitation2 > (:"|"|:) > RRR -> direct
+-ne> ::verbeCitation2 > (:"|"|:) > RRR -> direct
 
--ne>::verbeCitation2 > que > RRR -> indirect
+-ne> ::verbeCitation2 > que > RRR -> indirect
 
-(n|c)'est>pas>bien -> opinion_negative
+(n|c)'est > pas > bien -> opinion_negative
 
--n'>est>-pas>bien -> opinion_positive
+-n' > est > -pas > bien -> opinion_positive
 
 (c|n)'est pas mal -> opinion_positive
 
--n'>est>-pas>mal -> opinion_negative
+-n' > est > -pas > mal -> opinion_negative
