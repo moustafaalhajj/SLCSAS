@@ -330,12 +330,12 @@ sub insertTags{
 	#print rerere "\n";
 	return $str;
 }
-sub sentencesEn{
+sub sother{
 	my $para = shift;
 	my @parts = split(/(?<!\W\w[.])(?<![A-Z]\w[.])(?<![A-Z]\w\w[.])(?<![A-Z]\w\w\w[.])(?<=[.])(\s+)?(?=[^a-z])/,$para);
 	return @parts; 
 }
-sub sentencesAr{
+sub sar{
 	my $para = shift;
 	my @parts = split(/(?<=(\.))(\s+)?(?=.)/,$para);
 	return @parts; 
@@ -354,9 +354,9 @@ sub readtext{
 		chomp($segment);
 		my @parts = ();
 		if($lang eq "ar"){
-			@parts = sentencesAr($segment);
+			@parts = sar($segment);
 		}else{
-			@parts = sentencesEn($segment);
+			@parts = sother($segment);
 		}
 		push(@segments,@parts);
 	}
