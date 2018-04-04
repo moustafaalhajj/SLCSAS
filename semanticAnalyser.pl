@@ -430,10 +430,6 @@ while (my $file = readdir(DIR)) {
 			}
 			
 			
-
-			
-			
-			
 			if ($lang eq "ar"){$lang = "rtl";$direction="right"}else{$lang = "ltr";$direction="left";}
 			print RR "<html>
 	<head>
@@ -526,7 +522,7 @@ while (my $file = readdir(DIR)) {
 		font-variant: normal;background:#f7fcfe none repeat scroll 0 0;'";
 	}
 	print RR ">";
-	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>RESULT</h2>";
+	
 	#print RR "<ol  style='width:92%;'>	";
 		}elsif ($g == 3){
 			if( $rule =~ /(\s+)?max_distance_positive(\s+)?=(\s+)?(\d+)(\s+)?/ ){
@@ -562,6 +558,7 @@ while (my $file = readdir(DIR)) {
 			}
 		}
 	}
+	print RR "<h2 align=center color='brown' width='190px' style='background-color: lime;font-size: 100%;'>RESULT ( $countres )</h2>";
 	if ($countres != 0){
 		print RES " &nbsp;($countres)";
 		$countres = 0;
