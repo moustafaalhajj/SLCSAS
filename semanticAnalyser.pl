@@ -43,16 +43,27 @@ sub semanticMap{
 			my $branch = $_;
 			chomp($branch);
 			if( $branch !~ /^\s*$/){
+				
 				$branch = uc($branch);
 				$branch =~ s/\s+$//;
 				$branch =~ s/^\s+//;
+				
+				
+					$branch =~ s/\s+\|/\|/g;
+					$branch =~ s/\|\s+/\|/g;
+					
+					$branch =~ s/\s+\(/\(/g;
+					$branch =~ s/\(\s+/\(/g;
+					
+					$branch =~ s/\s+\)/\)/g;
+					$branch =~ s/\)\s+/\)/g;
+				
 				$branch =~ s/\x{064f}|\x{064e}|\x{064d}|\x{064c}|\x{064b}|\x{0652}|\x{0651}|\x{0650}|\x{061a}|\x{0619}|\x{0618}//g;
 				$branch =~ s/(\x{0623}|\x{0625}|\x{0622})/\x{0627}/g;
+				
 				if ( $branch =~ /^((\w|_)+)\s*\(((\w|_|\|)+)\)$/ ){
 					my $con = $1;
 					my $modele = $3;
-					$modele =~ s/\s+\|/\|/g;
-					$modele =~ s/\|\s+/\|/g;
 					$modele =~ s/\|/,/g;
 					if($all eq ""){
 						$all = $con."($modele)";
@@ -66,8 +77,12 @@ sub semanticMap{
 	close(CARD);
 	return $all;
 }
-
+#open(RRR,">:encoding(UTF-8)","rrrrr.txt");
 my $tree = semanticMap();
+
+#print RRR $tree;
+#close(RRR);
+
 
 open(RLS,"<:encoding(UTF-8)","rules.txt") || die "Opening file problem";
 my $rrule = <RLS>;
