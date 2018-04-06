@@ -112,7 +112,7 @@ sub changeatfirst{
 	$id++;
 	#while($conc =~ /<li>/g){$nbreli++;}
 	my $res = "<input class='toggle-box' id='$conc$id' type='checkbox' >
-			<label for='$conc$id'><h4>$conc<\/h4><\/label>\n";
+			<label for='$conc$id'><h4>$conc<\/h4><\/label>";
 	return $res;
 }
 
@@ -566,7 +566,7 @@ while (my $file = readdir(DIR)) {
 	print RES "</li>";
 	
 	my $tr = $tree;
-	while( $tree =~ /<h4>((\w|_)+)<\/h4><\/label>/g){
+	while( $tree =~ /<h4>((\w|_)+)<\/h4><\/label>(<div style='margin-(right|left):12px;'>)?/g){
 		my $conc = $1;
 		my $tochange = $&;
 		$tr =~ s/$tochange/addol($tochange,$conc,%rescateg)/e;
