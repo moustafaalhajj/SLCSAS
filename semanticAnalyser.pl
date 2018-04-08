@@ -585,14 +585,23 @@ while (my $file = readdir(DIR)) {
 	#}
 	
 	print RR "<h2 align = center  style='background-color: lime;font-size: 100%;'>ORIGINAL TEXT</h2>";
-	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>
-	<br><br>
+	
+	if($origtext =~ /<title>(.*?)<\/title>/s){
+		print RR "<h3>$1</h3>";
+	}
+	print RR "<div style='padding-left:30px;padding-right:30px;text-align:justify;'>$origtext</div>";
+	if($origtext =~ /<input type=\"hidden\" name=\"link\" value=\"(.*?)\"><\/input>/s){
+		my $anchor = substr ($1,0,100);
+		if(length($1)>100){$anchor.="...";}
+		print RR "<br><div dir=ltr style='font-size:14px;font-family: Georgia, serif;'>Reference: <a href=\"$1\" title=\"$1\" target=\"_blank\">$anchor</a></div>";
+	}
+	
+	print RR "<br><br>
 	<hr align=\"center\" color=\"brown\" width=\"190px\">
 	<div align=\"center\" style=\"font-family: verdana; direction: ltr; font-size: 9px;\">
 	CSLC tools 2018. All Rights Reserved.  </div>
 	</body>
 	</html>";
-	close(RR);
 	close(RULES);
 }
 closedir(DIR);
