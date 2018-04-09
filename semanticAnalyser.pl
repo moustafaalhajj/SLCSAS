@@ -21,9 +21,16 @@ while(<RULES>){
 		if ( $rule =~ /^\s*::((\w|_)+)\s*=\s*(.*)/){
 			 my $varname = $1; 
 			 my $varvalue = $3;
-			 $varvalue =~ s/\s+$//g;
-			 $varvalue =~ s/\s+\|/\|/g;
-			 $varvalue =~ s/\|\s+/|/g;
+			$varvalue =~ s/\s+$//g;
+			$varvalue =~ s/\s+\|/\|/g;
+			$varvalue =~ s/\|\s+/\|/g;
+
+			$varvalue =~ s/\s+\(/\(/g;
+			$varvalue =~ s/\(\s+/\(/g;
+
+			$varvalue =~ s/\s+\)/\)/g;
+			$varvalue =~ s/\)\s+/\)/g;
+			 
 			 $var{$varname} = $varvalue;
 		}
 	}
@@ -155,6 +162,16 @@ sub segObeyRule {
 	foreach my $marker(@markers){
 		$marker =~ s/::((\w|_)+)/\($var{$1}\)/g;
 		$marker =~ s/\x{061F}/?/g;
+		
+		$marker =~ s/\s+\|/\|/g;
+		$marker =~ s/\|\s+/\|/g;
+
+		#$marker =~ s/\s+\(/\(/g;
+		$marker =~ s/\(\s+/\(/g;
+
+		$marker =~ s/\s+\)/\)/g;
+		#$marker =~ s/\)\s+/\)/g;
+
 		
 		if($marker !~ /^-/ && $marker !~ /^RRR$/){
 			my $exit = 0;
