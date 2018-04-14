@@ -46,7 +46,7 @@ Then it can be used as it, for example:
             
  To extract from the sentences one or more excerpts, use RRR instead of marker, if all excerpts are empty then the rule is not applicable to this sentence, therefore there is no result. For example to extract the part after "that": 
  
-            -does not>::verb_citation>RRR -> citation
+            -does not > ::verb_citation > RRR -> citation
  
  
 A marker as following means a term begins with 'th', don't use it in the value of a variable
@@ -84,7 +84,7 @@ This program splits texts into sentences and then researches in sentences positi
    
    5. Create 'semanticMap.txt' (you can download it) and put into it the semantic map, here is an example: 
          
-            root (citation|opinion_negative|opinion_positive)
+            root ( citation | opinion_negative | opinion_positive )
    
    6. Double clic the file 'semanticAnalyser.pl', then the file results.html will be created and visualised in your default internet browser
    
