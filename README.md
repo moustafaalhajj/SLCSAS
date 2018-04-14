@@ -9,7 +9,7 @@ This program extracts sentences satisfying a set of linguistic rules and belongi
    
    3. The semantic map stored in the file "semanticMap.txt" in the following format (don't use space in the name of a concept)
    
-          root (citation|opinion_negative|opinion_positive)
+          root (citation | opinion_negative | opinion_positive )
 
    2. A set of linguistic rules defined in the file 'rules.txt' in the following format:
 
