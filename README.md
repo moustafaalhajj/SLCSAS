@@ -1,7 +1,7 @@
 # Semantic Analyser
 This program is made for semantic classification of sentences, in Arabic, French and English, following a given semantic map. The classification is based on a set of linguistic rules. It permits automatic classification of textual segments by analyzing surface forms in their context. It can be used to recognize entities in the text.
 
-This program extracts sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlited in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
+This program extracts sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlighted in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
 
 ## Input of the program
 
@@ -59,9 +59,9 @@ A marker as following means a term begins with 'th', don't use it in the value o
             
 ## Output of the program
 
-HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts form sentences are underlined in sentences' result. 
+HTML files showing extracted sentences grouped by semantic categories where positive markers are highlighted in yellow and the context of negative markers are highlighted in red. Negative markers appear when moving the mouse over contexts in red. Excerpts from sentences are underlined in sentences' result. 
 
-This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules definied in 'rules.txt'.
+This program splits texts into sentences and then researches in sentences positive and negative markers in order they appear in rules defined in 'rules.txt'.
 
 ## To use it
 
