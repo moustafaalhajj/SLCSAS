@@ -1,4 +1,4 @@
-# SLC Semantic Analysis System
+# SLC Semantic Analysis System (SLCSAS)
 This program is made for semantic classification of sentences, in Arabic, French and English, following a given semantic map. The classification is based on a set of linguistic rules. It permits automatic classification of textual segments by analyzing surface forms in their context. It can be used to recognize entities in the text.
 
 This program extracts sentences satisfying a set of linguistic rules and belonging to defined semantic categories. Linguistic markers (whether they are positive or negative) are highlighted in extracted sentences helping linguistics to verify the validity of their linguistic rules. 
